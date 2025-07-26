@@ -1,0 +1,1127 @@
+<?php
+
+namespace KoalaPress\FlexibleContent {
+    class FlexibleContentRenderer
+    {
+        /**
+         * Render a flexible content field (ACF) as module views.
+         *
+         * @param string|array|null $content ACF field name or flexible content array
+         * @param int|null $postId Optional post ID if $content is a field name
+         * @param string $viewPrefix View namespace (e.g. "module.")
+         * @return string Rendered HTML
+         */
+        public static function render(string|array|null $content, ?int $postId = null, string $viewPrefix = 'module.'): string
+        {
+        }
+    }
+}
+namespace KoalaPress\FlexibleContent\Acf\Locations {
+    class FlexibleContentLocation extends \ACF_Location
+    {
+        /**
+         * Initialize the location with its name and label.
+         */
+        public function initialize(): void
+        {
+        }
+        /**
+         * Get the values for the flexible content location.
+         *
+         * @param string $rule The rule for which to get values.
+         * @return array An array of values for the flexible content location.
+         */
+        public function get_values($rule): array
+        {
+        }
+    }
+}
+namespace KoalaPress\FlexibleContent\Finder {
+    class LayoutFinder
+    {
+        /**
+         * Find and return the layouts for flexible content.
+         *
+         * @return array
+         */
+        public static function find(): array
+        {
+        }
+    }
+}
+namespace KoalaPress\FlexibleContent {
+    class FlexibleContentServiceProvider extends \Illuminate\Support\ServiceProvider
+    {
+        /**
+         * Register the service provider.
+         *
+         * @return void
+         */
+        public function register(): void
+        {
+        }
+        /**
+         * Boot the service provider.
+         *
+         * @return void
+         */
+        public function boot(): void
+        {
+        }
+    }
+}
+namespace KoalaPress\PluginsManager\Contracts {
+    interface PluginsManagerInterface
+    {
+        /**
+         * Synchronizes the plugins with the current theme's bundled plugins.
+         *
+         * This method reads the `composer.lock` file to determine which plugins
+         * are required, copies them from the theme's bundled plugins directory
+         * to the WordPress plugins directory, and marks them as managed by the theme.
+         */
+        public function sync(): void;
+    }
+}
+namespace KoalaPress\PluginsManager {
+    abstract class AbstractPluginsManagerInterface implements \KoalaPress\PluginsManager\Contracts\PluginsManagerInterface
+    {
+        /**
+         * Path to the theme's composer.lock file.
+         *
+         * @var string
+         */
+        protected string $composerLockPath;
+        /**
+         * File that marks a plugin as managed by the theme.
+         *
+         * @var string
+         */
+        protected string $markerFile = '.managed-by-theme';
+        /**
+         * Filesystem instance for file operations.
+         *
+         * @var Filesystem
+         */
+        protected $fs;
+        /**
+         * The slug of the current theme.
+         *
+         * @var string
+         */
+        protected string $themeSlug;
+        /**
+         * The list of installed plugins freshly installed by the theme.
+         *
+         * @var array
+         */
+        protected $installedPlugins = [];
+        /**
+         * AbstractPluginsManager constructor.
+         *
+         * Initializes the manager with the theme's composer.lock path and filesystem instance.
+         */
+        public function __construct()
+        {
+        }
+        /**
+         * Abstract method to define the source path for plugins.
+         *
+         * @return string
+         */
+        abstract protected function sourcePath(): string;
+        /**
+         * Abstract method to define the target path for plugins.
+         *
+         * @return string
+         */
+        abstract protected function targetPath(): string;
+        /**
+         * Abstract method to define the composer type for plugins.
+         *
+         * @return string
+         */
+        abstract protected function composerType(): string;
+        /**
+         * Synchronizes the plugins with the current theme's bundled plugins.
+         *
+         * This method reads the `composer.lock` file to determine which plugins
+         * are required, copies them from the theme's bundled plugins directory
+         * to the WordPress plugins directory, and marks them as managed by the theme.
+         *
+         * @return void
+         * @throws FileNotFoundException
+         * @throws ContainerExceptionInterface
+         * @throws NotFoundExceptionInterface
+         */
+        public function sync(): void
+        {
+        }
+        /**
+         * Returns an array of slugs for plugins managed by the theme.
+         *
+         * This method reads the `composer.lock` file and extracts the slugs of
+         * plugins that are managed by the theme, based on their type.
+         *
+         * @return array
+         * @throws ContainerExceptionInterface
+         * @throws FileNotFoundException
+         * @throws NotFoundExceptionInterface
+         */
+        public function getManagedPluginSlugs(): array
+        {
+        }
+        /**
+         * Returns the list of installed plugins that were freshly installed by the theme.
+         *
+         * @return array
+         */
+        public function getInstalledPlugins(): array
+        {
+        }
+    }
+    class MuPluginsManager extends \KoalaPress\PluginsManager\AbstractPluginsManagerInterface
+    {
+        /**
+         * @inheritDoc
+         */
+        protected function sourcePath(): string
+        {
+        }
+        /**
+         * @inheritDoc
+         */
+        protected function targetPath(): string
+        {
+        }
+        /**
+         * @inheritDoc
+         */
+        protected function composerType(): string
+        {
+        }
+    }
+}
+namespace KoalaPress\PluginsManager\Contracts {
+    interface PluginsActivatorInterface
+    {
+        /**
+         * Aktiviert Plugins anhand ihrer Slugs (Ordnernamen).
+         *
+         * @param array $slugs Slugs wie ['acf', 'yoast', ...]
+         * @return void
+         */
+        public function activate(array $slugs): void;
+    }
+}
+namespace KoalaPress\PluginsManager {
+    class PluginsActivator implements \KoalaPress\PluginsManager\Contracts\PluginsActivatorInterface
+    {
+        /**
+         * Activates the specified plugins by their slugs.
+         *
+         * This method checks if each plugin is already active, and if not,
+         * it activates the plugin and logs the activation.
+         *
+         * @param array $slugs An array of plugin slugs to activate.
+         */
+        public function activate(array $slugs): void
+        {
+        }
+    }
+    class PluginsManagerServiceProvider extends \Illuminate\Support\ServiceProvider
+    {
+        /**
+         * Register the service provider.
+         *
+         * Merges the image sizes configuration from the specified file.
+         *
+         * @return void
+         */
+        public function register(): void
+        {
+        }
+        /**
+         * Bootstrap the service provider.
+         *
+         * @return void
+         * @throws FileNotFoundException
+         * @throws ContainerExceptionInterface
+         * @throws NotFoundExceptionInterface
+         */
+        public function boot(): void
+        {
+        }
+    }
+    class PluginsManager extends \KoalaPress\PluginsManager\AbstractPluginsManagerInterface
+    {
+        /**
+         * @inheritDoc
+         */
+        protected function sourcePath(): string
+        {
+        }
+        /**
+         * @inheritDoc
+         */
+        protected function targetPath(): string
+        {
+        }
+        /**
+         * @inheritDoc
+         */
+        protected function composerType(): string
+        {
+        }
+    }
+}
+namespace KoalaPress\Foundation {
+    class Application extends \Roots\Acorn\Application
+    {
+        const VERSION = '0.0.1';
+    }
+}
+namespace KoalaPress\Model\Casts {
+    class ACF implements \Illuminate\Contracts\Database\Eloquent\CastsAttributes
+    {
+        /**
+         * @inheritDoc
+         */
+        public function get(\Illuminate\Database\Eloquent\Model $model, string $key, mixed $value, array $attributes)
+        {
+        }
+        /**
+         * @inheritDoc
+         */
+        public function set(\Illuminate\Database\Eloquent\Model $model, string $key, mixed $value, array $attributes): void
+        {
+        }
+    }
+}
+namespace KoalaPress\Model\Traits {
+    trait ForwardsNamedCalls
+    {
+        /**
+         * Add custom callback methods
+         *
+         * @return mixed|string
+         */
+        public function __call($method, $parameters)
+        {
+        }
+    }
+    trait HasAdminColumns
+    {
+        /**
+         * Get the column value for the admin table
+         */
+        public function getColumn($which): string
+        {
+        }
+    }
+    trait HasACF
+    {
+        /**
+         * Initialize the HasACF trait
+         */
+        public function initializeHasACF(): void
+        {
+        }
+        /**
+         * return the acf key following ACFs convention for the current post or term
+         */
+        public function getAcfKey(): ?string
+        {
+        }
+        /**
+         * return the acf fields for the current post or term
+         */
+        public function getAcfAttribute()
+        {
+        }
+    }
+    trait DefaultOrderBy
+    {
+        /**
+         * The column to order by.
+         *
+         * @return void
+         */
+        protected static function bootDefaultOrderBy(): void
+        {
+        }
+    }
+}
+namespace KoalaPress\Model\PostType {
+    class Model extends \Corcel\Model\Post
+    {
+        use \KoalaPress\Model\Traits\ForwardsNamedCalls;
+        use \KoalaPress\Model\Traits\HasAdminColumns;
+        use \KoalaPress\Model\Traits\HasACF;
+        use \KoalaPress\Model\Traits\DefaultOrderBy;
+        /**
+         * set the default order by column
+         *
+         * @var string
+         */
+        protected static $orderByColumn = 'post_date';
+        /**
+         * set the default order by column direction
+         *
+         * @var string
+         */
+        protected static $orderByColumnDirection = 'desc';
+        /**
+         * Set the default casts for the model.
+         *
+         * @var string[]
+         */
+        public $casts = ['post_date' => 'datetime', 'post_modified' => 'datetime'];
+        /**
+         * The icon for the post type @see https://developer.wordpress.org/resource/dashicons/
+         */
+        public string $icon = 'editor-quote';
+        /**
+         * Will this post type use flexible content?
+         *
+         * @var bool
+         */
+        public $useFlexibleContent = false;
+        /**
+         * Names for the post type @see https://posttypes.jjgrainger.co.uk/post-types/create-a-post-type
+         */
+        public array $names = [];
+        /**
+         * Labels for the post type @see https://posttypes.jjgrainger.co.uk/post-types/create-a-post-type
+         */
+        public array $labels = [];
+        /**
+         * Options for the post type @see https://posttypes.jjgrainger.co.uk/post-types/create-a-post-type
+         */
+        public array $options = [];
+        /**
+         * Add custom columns to the admin table
+         */
+        public array $adminColumns = [];
+        /**
+         * Remove columns from the admin table
+         */
+        public array $adminColumnsHidden = [];
+        /**
+         * The post type
+         *
+         * @return void
+         * @var array
+         *
+         */
+        public function __construct(array $attributes = [])
+        {
+        }
+        /**
+         * Get the name for this model
+         *
+         * @return string
+         */
+        public function getName(): string
+        {
+        }
+        /**
+         * Append all mutated attributes to the array representation of this post
+         */
+        public function toArray(): array
+        {
+        }
+        /**
+         * Get the post date as carbom´n instance
+         *
+         * @return Carbon
+         */
+        public function getPostDateAttribute($value)
+        {
+        }
+        /**
+         * Get the permalink for the post
+         *
+         * @return false|string
+         */
+        public function getPermalinkAttribute(): bool|string
+        {
+        }
+    }
+    class PostTypeServiceProvider extends \Illuminate\Support\ServiceProvider
+    {
+        public function register(): void
+        {
+        }
+        /**
+         * Boot the service provider.
+         *
+         * @return void
+         * @throws Exception
+         */
+        public function boot(): void
+        {
+        }
+        /**
+         * Register Post Types
+         *
+         * @return void
+         * @throws Exception
+         */
+        protected function registerPostTypes(): void
+        {
+        }
+    }
+}
+namespace KoalaPress\Model\Menu {
+    class Model extends \Corcel\Model\Menu
+    {
+        /**
+         * The location of the menu.
+         *
+         * @var string|null
+         */
+        public ?string $location = null;
+        /**
+         * The name of the menu.
+         *
+         * @var string|null
+         */
+        public ?string $name = null;
+        /**
+         * Use slug to query the menu.
+         *
+         * @return TaxonomyBuilder
+         */
+        public function newQuery(): \Corcel\Model\Builder\TaxonomyBuilder
+        {
+        }
+        /**
+         * @return false|int|string
+         */
+        public function getLocationAttribute(): false|int|string|null
+        {
+        }
+        /**
+         * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+         */
+        public function items()
+        {
+        }
+        /**
+         * Recursively transform a menu item and its children.
+         *
+         * @param $item
+         * @return array
+         */
+        protected function transformMenuItem($item): array
+        {
+        }
+        /**
+         * @return array
+         */
+        public function nestify(): \Illuminate\Support\Collection
+        {
+        }
+    }
+    class MenuItem extends \Corcel\Model\MenuItem
+    {
+        /**
+         * @var string
+         */
+        protected $postType = 'nav_menu_item';
+        /**
+         * @var array
+         */
+        protected $instanceRelations = ['post' => \KoalaPress\Model\PostType\Model::class, 'page' => \KoalaPress\Model\PostType\Model::class, 'custom' => \Corcel\Model\CustomLink::class, 'category' => \Corcel\Model\Taxonomy::class];
+        /**
+         * MenuItem constructor.
+         *
+         */
+        public function __construct(array $attributes = [])
+        {
+        }
+        /**
+         * @return Post|Page|CustomLink|Taxonomy
+         */
+        public function parent(): \Corcel\Model\Taxonomy|\Corcel\Model\CustomLink|\Corcel\Model\Page|\Corcel\Model\Post|null
+        {
+        }
+        /**
+         * @return Post|Page|CustomLink|Taxonomy
+         */
+        public function instance(): \Corcel\Model\Taxonomy|\Corcel\Model\CustomLink|\Corcel\Model\Page|\Corcel\Model\Post|null
+        {
+        }
+        /**
+         * @return string
+         */
+        protected function getClassName(): string
+        {
+        }
+        /**
+         * @return false|mixed|string|WP_Error
+         */
+        public function getUrlAttribute(): mixed
+        {
+        }
+        /**
+         * @return int|mixed|string|WP_Error|null
+         */
+        public function getTitleAttribute(): mixed
+        {
+        }
+        /**
+         * @return mixed
+         */
+        public function getCurrentAttribute(): mixed
+        {
+        }
+        /**
+         * @return mixed
+         */
+        public function getCurrentItemParentAttribute(): mixed
+        {
+        }
+        /**
+         * @return mixed
+         */
+        public function getCurrentItemAncestorAttribute(): mixed
+        {
+        }
+        /**
+         * @return bool
+         */
+        public function getInCurrentPathAttribute(): bool
+        {
+        }
+        /**
+         * @return string
+         */
+        public function getClassesAttribute(): string
+        {
+        }
+        /**
+         * @return HasManyThrough
+         */
+        public function children(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+        {
+        }
+    }
+    class MenuServiceProvider extends \Illuminate\Support\ServiceProvider
+    {
+        public function register(): void
+        {
+        }
+        /**
+         * Boot the service provider.
+         *
+         * @return void
+         * @throws Exception
+         */
+        public function boot(): void
+        {
+        }
+        /**
+         * Register Post Types
+         *
+         * @return void
+         * @throws Exception
+         */
+        protected function registerMenus(): void
+        {
+        }
+    }
+}
+namespace KoalaPress\Model\Taxonomy {
+    class Model extends \Corcel\Model\Taxonomy
+    {
+        use \KoalaPress\Model\Traits\ForwardsNamedCalls;
+        use \KoalaPress\Model\Traits\HasAdminColumns;
+        use \KoalaPress\Model\Traits\HasACF;
+        use \KoalaPress\Model\Traits\DefaultOrderBy;
+        /**
+         * Names for the post taxonomy @see https://posttypes.jjgrainger.co.uk/taxonomies/create-a-taxonomy
+         */
+        public array $names = [];
+        /**
+         * Options for the post taxonomy @see https://posttypes.jjgrainger.co.uk/taxonomies/create-a-taxonomy
+         */
+        public array $options = [];
+        /**
+         * Labels for the post taxonomy @see https://posttypes.jjgrainger.co.uk/taxonomies/create-a-taxonomy
+         */
+        public array $labels = [];
+        /**
+         * The related PostTypes @see https://posttypes.jjgrainger.co.uk/taxonomies/add-to-post-type
+         */
+        public array $postTypes = [];
+        /**
+         * Should that taxonomy be unique?
+         */
+        public bool $unique = false;
+        /**
+         * Should that taxonomy be hierarchical?
+         */
+        public bool $hierarchical = true;
+        /**
+         * Add custom columns to the admin table
+         */
+        public array $admin_columns = [];
+        /**
+         * Remove columns from the admin table
+         */
+        public array $admin_columns_hidden = [];
+        /**
+         * The taxonomy name
+         */
+        protected ?string $taxonomy = null;
+        public function __construct(array $attributes = [])
+        {
+        }
+        /**
+         * Get the taxonomy name
+         */
+        public function getTaxonomy(): string
+        {
+        }
+        /**
+         * Get the name attribute
+         *
+         * @return string
+         */
+        public function getName(): string
+        {
+        }
+        /**
+         * Get the term link attribute
+         *
+         * @return array|false|int|string|WP_Error|WP_Term|null
+         */
+        public function getTermLinkAttribute()
+        {
+        }
+        /**
+         * Get the url attribute
+         *
+         * @return array|false|int|string|WP_Error|WP_Term|null
+         */
+        public function getUrlAttribute()
+        {
+        }
+        /**
+         * @return mixed
+         */
+        public function getTitleAttribute()
+        {
+        }
+        /**
+         * @return mixed
+         */
+        public function getSlugAttribute()
+        {
+        }
+        /**
+         * @param Builder $query
+         * @return Builder
+         */
+        public function scopeActive(\Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder
+        {
+        }
+        /**
+         * @return BelongsToMany
+         */
+        public function posts(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+        {
+        }
+    }
+    class TaxonomyServiceProvider extends \Illuminate\Support\ServiceProvider
+    {
+        public function register(): void
+        {
+        }
+        /**
+         * Boot the service provider.
+         *
+         * @return void
+         * @throws Exception
+         */
+        public function boot(): void
+        {
+        }
+        /**
+         * Register Taxonomies
+         *
+         * @return void
+         * @throws Exception
+         */
+        protected function registerTaxonomies(): void
+        {
+        }
+    }
+}
+namespace KoalaPress\Providers {
+    class ServiceProvider extends \Illuminate\Support\ServiceProvider
+    {
+        /**
+         * Register the service provider.
+         *
+         * @return void
+         */
+        public function register(): void
+        {
+        }
+        /**
+         * Bootstrap the service provider.
+         *
+         * @return void
+         * @throws FileNotFoundException
+         * @throws ContainerExceptionInterface
+         * @throws NotFoundExceptionInterface
+         */
+        public function boot(): void
+        {
+        }
+    }
+}
+namespace KoalaPress\Support\Helper {
+    class NamingHelper
+    {
+        /**
+         * @param string $className
+         * @param string|null $prefix
+         * @param string|null $suffix
+         * @return string
+         */
+        public static function getShortName(string $className, ?string $prefix = null, ?string $suffix = null): string
+        {
+        }
+    }
+}
+namespace KoalaPress\Support\ModelResolver {
+    class PostTypeResolver
+    {
+        /**
+         * Resolve the model class for a given post type.
+         *
+         * @param string $postType The post type to resolve.
+         * @return string The fully qualified class name of the model.
+         */
+        public static function resolve(string $postType): string
+        {
+        }
+    }
+    class ModelResolver
+    {
+        /**
+         * Resolve the model class from the given query object.
+         *
+         * @param mixed $query
+         * @return string|null
+         */
+        public static function resolveFromQuery($query): ?string
+        {
+        }
+        /**
+         * Find the model from the current query.
+         *
+         * This method retrieves the queried object and resolves the model class
+         * based on the post type or taxonomy. It then finds the model instance
+         * using the primary key of the queried object.
+         *
+         * @return array
+         */
+        public static function findFromQuery()
+        {
+        }
+    }
+    class TaxonomyResolver
+    {
+        /**
+         * Resolve the model class for a given post type.
+         *
+         * @param string $taxonomy The post type to resolve.
+         * @return string The fully qualified class name of the model.
+         */
+        public static function resolve(string $taxonomy): string
+        {
+        }
+    }
+}
+namespace KoalaPress\Support\ClassResolver {
+    abstract class ClassResolver
+    {
+        /**
+         * @var string The directory where post type classes are located.
+         */
+        protected static string $dir = 'Models/PostType';
+        /**
+         * The cache key for storing resolved classes.
+         *
+         * @var string
+         */
+        protected static string $cacheKey = 'koalapress.class-resolver.classes';
+        /**
+         * @var string The base class that all post type classes should extend.
+         */
+        protected static string $subclassOf = \KoalaPress\Model\PostType\Model::class;
+        /**
+         * @throws ReflectionException
+         */
+        public static function resolve(): \Illuminate\Support\Collection
+        {
+        }
+    }
+    class MenuResolver extends \KoalaPress\Support\ClassResolver\ClassResolver
+    {
+        /**
+         * @var string The cache key for storing resolved post type classes.
+         */
+        protected static string $cacheKey = 'koalapress.menus';
+        /**
+         * @var string The directory where menu classes are located.
+         */
+        protected static string $dir = 'Model/Menu';
+        /**
+         * @var string The base class that all post type classes should extend.
+         */
+        protected static string $subclassOf = \KoalaPress\Model\Menu\Model::class;
+    }
+    class PostTypeResolver extends \KoalaPress\Support\ClassResolver\ClassResolver
+    {
+        /**
+         * @var string The cache key for storing resolved post type classes.
+         */
+        protected static string $cacheKey = 'koalapress.post-types';
+        /**
+         * @var string The directory where post type classes are located.
+         */
+        protected static string $dir = 'Model/PostType';
+        /**
+         * @var string The base class that all post type classes should extend.
+         */
+        protected static string $subclassOf = \KoalaPress\Model\PostType\Model::class;
+    }
+    class TaxonomyResolver extends \KoalaPress\Support\ClassResolver\ClassResolver
+    {
+        /**
+         * @var string The cache key for storing resolved post type classes.
+         */
+        protected static string $cacheKey = 'koalapress.taxonomies';
+        /**
+         * @var string The directory where taxonomy classes are located.
+         */
+        protected static string $dir = 'Model/Taxonomy';
+        /**
+         * @var string The base class that all post type classes should extend.
+         */
+        protected static string $subclassOf = \KoalaPress\Model\Taxonomy\Model::class;
+    }
+}
+namespace KoalaPress\Image {
+    class Image
+    {
+        public function getSourceset($image = null, $size = 'variable', $lazyload = false): ?array
+        {
+        }
+    }
+    class ImageServiceProvider extends \Illuminate\Support\ServiceProvider
+    {
+        public function register(): void
+        {
+        }
+        /**
+         * Register the image sizes for the application.
+         *
+         * @return void
+         */
+        public function boot(): void
+        {
+        }
+    }
+}
+namespace KoalaPress\View\Extensions {
+    class TwigExtension extends \Twig\Extension\AbstractExtension
+    {
+        /**
+         * @var Application
+         */
+        protected \Illuminate\Contracts\Foundation\Application $container;
+        public function __construct(\Illuminate\Contracts\Foundation\Application $container)
+        {
+        }
+        /**
+         * Define the extension name.
+         *
+         * @return string
+         */
+        public function getName(): string
+        {
+        }
+        /**
+         * Register a list of tests available into Twig templates.
+         *
+         * @return array|TwigTest[]
+         */
+        public function getTests(): array
+        {
+        }
+        /**
+         * Register a global "fn" which can be used
+         * to call any WordPress or core PHP functions.
+         *
+         * @return array
+         */
+        public function getGlobals(): array
+        {
+        }
+        /**
+         * Allow developers to call core php and WordPress functions
+         * using the `fn` namespace inside their templates.
+         * Linked to the global call only...
+         *
+         * @param string $name
+         * @param array $arguments
+         *
+         * @return mixed
+         */
+        public function __call(string $name, array $arguments)
+        {
+        }
+        /**
+         * Register a list of filters available into Twig templates.
+         *
+         * @return array|TwigFilter[]
+         */
+        public function getFilters(): array
+        {
+        }
+        /**
+         * Register a list of functions available into Twig templates.
+         *
+         * @return array|TwigFunction[]
+         */
+        public function getFunctions(): array
+        {
+        }
+    }
+}
+namespace KoalaPress\View {
+    class ViewServiceProvider extends \Roots\Acorn\View\ViewServiceProvider
+    {
+        /**
+         * Register the service provider.
+         *
+         * @return void
+         */
+        public function register(): void
+        {
+        }
+        /**
+         * Bootstrap the service provider.
+         *
+         * @return void
+         */
+        public function boot(): void
+        {
+        }
+        /**
+         * Register View Finder
+         *
+         * @return void
+         */
+        public function registerViewFinder(): void
+        {
+        }
+        /**
+         * Register view composers.
+         *
+         * @return void
+         */
+        public function registerComposers(): void
+        {
+        }
+    }
+}
+namespace KoalaPress\View\Engines {
+    class TwigEngine extends \Illuminate\View\Engines\PhpEngine
+    {
+        /**
+         * @var Environment
+         */
+        protected \Twig\Environment $environment;
+        /**
+         * @var ViewFinderInterface
+         */
+        protected \Illuminate\View\ViewFinderInterface $finder;
+        /**
+         * @var string
+         */
+        protected string $extension = '.twig';
+        public function __construct(\Twig\Environment $environment, \Illuminate\View\ViewFinderInterface $finder)
+        {
+        }
+        /**
+         * Return the evaluated template.
+         *
+         * @param string $path The file name with its file extension.
+         * @param array $data Template data (view data)
+         *
+         * @return string
+         * @throws LoaderError
+         * @throws RuntimeError
+         * @throws SyntaxError
+         */
+        public function get($path, array $data = []): string
+        {
+        }
+    }
+}
+namespace KoalaPress\View\Composers {
+    class GlobalComposer extends \Roots\Acorn\View\Composer
+    {
+        /**
+         * The list of views served by this composer.
+         *
+         * @var string[]
+         */
+        protected static $views = ['*'];
+        /**
+         *
+         *
+         * @return array
+         */
+        public function with(): array
+        {
+        }
+    }
+}
+namespace KoalaPress\View\Loader {
+    class TwigLoader extends \Twig\Loader\FilesystemLoader
+    {
+        /**
+         *
+         * @param string $name The template name, which can be in dot notation.
+         * @param bool $throw Whether to throw an exception if the template is not found.
+         * @throws LoaderError
+         */
+        public function findTemplate(string $name, bool $throw = true): ?string
+        {
+        }
+    }
+}
+namespace {
+    function module($name, $args = [])
+    {
+    }
+    function contents(string $asset, ?string $manifest = \null): string
+    {
+    }
+    /** * Generate an image source set for responsive images.
+     *
+     * @return array The HTML source set attribute.
+     */
+    function source_set(): array
+    {
+    }
+}

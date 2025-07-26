@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  stubs:
+    image: composer:latest
+    working_dir: /app
+    volumes:
+      - ./stubs:/stubs
+    command: >
+      sh -c "
+        export COMPOSER_HOME=/composer &&
+        composer global require php-stubs/generator --no-suggest &&
+        echo '✅ generator installiert' &&
+        ls -al /composer/vendor/bin &&
+        export PATH=\$(echo \$PATH):/composer/vendor/bin &&
+        mkdir -p koalapress &&
+        cd koalapress &&
+        composer init --name=koalapress/stubber --description='KoalaPress Framework' --no-interaction &&
+        composer config minimum-stability dev &&
+        composer config prefer-stable true &&
+        composer require koalapress/framework &&
+        ls -al vendor/koalapress/framework &&
+        rm -rf /stubs/* &&
+        generate-stubs vendor/koalapress/framework/src/KoalaPress --force --out=/stubs/koalapress-stubs.stub &&
+        generate-stubs vendor/roots/acorn/src/Roots --force --out=/stubs/acorn-stubs.stub &&
+        generate-stubs vendor/jgrossi/corcel/src --force --out=/stubs/corcel-stubs.stub
+      "

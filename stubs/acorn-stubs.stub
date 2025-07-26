@@ -1,0 +1,3282 @@
+<?php
+
+namespace Roots\Acorn\Application\Concerns {
+    trait Bootable
+    {
+        /**
+         * The configuration used to boot the application.
+         */
+        protected array $bootConfiguration = [];
+        /**
+         * Boot the application and handle the request.
+         */
+        public function bootAcorn(array $bootConfiguration = []): static
+        {
+        }
+        /**
+         * Boot the Application for console.
+         */
+        protected function bootConsole(): void
+        {
+        }
+        /**
+         * Boot the Application for WP-CLI.
+         */
+        protected function bootWpCli(): void
+        {
+        }
+        /**
+         * Boot the Application for HTTP requests.
+         */
+        protected function bootHttp(): void
+        {
+        }
+        /**
+         * Enable `$_SERVER[HTTPS]` in a console environment.
+         */
+        protected function enableHttpsInConsole(): void
+        {
+        }
+        /**
+         * Register a default route for WordPress requests.
+         */
+        protected function registerWordPressRoute(): void
+        {
+        }
+        /**
+         * Register the request handler.
+         */
+        protected function registerRequestHandler(\Illuminate\Http\Request $request, ?\Illuminate\Routing\Route $route): void
+        {
+        }
+        /**
+         * Handle the request.
+         */
+        public function handleRequest(\Illuminate\Http\Request $request): void
+        {
+        }
+        /**
+         * Retrieve the boot configuration.
+         */
+        public function getBootConfiguration(): array
+        {
+        }
+    }
+}
+namespace Roots\Acorn {
+    class PackageManifest extends \Illuminate\Foundation\PackageManifest
+    {
+        /**
+         * The composer.json paths.
+         *
+         * @var string[]
+         */
+        public $composerPaths;
+        /**
+         * Create a new package manifest instance.
+         *
+         * @param  string[]  $composerPaths
+         * @param  string  $manifestPath
+         * @return void
+         */
+        public function __construct(\Illuminate\Filesystem\Filesystem $files, array $composerPaths, $manifestPath)
+        {
+        }
+        /**
+         * Get a package name based on its provider
+         *
+         * @param  string  $providerName
+         * @return string
+         *
+         * @throws FileNotFoundException
+         * @throws Exception
+         */
+        public function getPackage($providerName)
+        {
+        }
+        /**
+         * Build the manifest and write it to disk.
+         *
+         * @return void
+         */
+        public function build()
+        {
+        }
+        /**
+         * Format the given package name.
+         *
+         * @param  string  $package
+         * @param  string  $vendorPath
+         * @return string
+         */
+        protected function format($package, $vendorPath = null)
+        {
+        }
+        /**
+         * Get all of the package names that should be ignored.
+         *
+         * @return array
+         */
+        protected function packagesToIgnore()
+        {
+        }
+    }
+    /**
+     * Application container
+     */
+    class Application extends \Illuminate\Foundation\Application
+    {
+        use \Roots\Acorn\Application\Concerns\Bootable;
+        /**
+         * The Acorn framework version.
+         *
+         * @var string
+         */
+        public const VERSION = '5.0.4';
+        /**
+         * The custom resource path defined by the developer.
+         *
+         * @var string
+         */
+        protected $resourcePath;
+        /**
+         * Indicates if the application handles WordPress requests.
+         */
+        protected bool $handleWordPressRequests = false;
+        /**
+         * Create a new Application instance.
+         *
+         * @param  string|null  $basePath
+         * @return void
+         */
+        public function __construct($basePath = null)
+        {
+        }
+        /**
+         * Begin configuring a new Laravel application instance.
+         *
+         * @return \Roots\Acorn\Configuration\ApplicationBuilder
+         */
+        public static function configure(?string $basePath = null)
+        {
+        }
+        /**
+         * Handle WordPress routes using the request handler.
+         */
+        public function handleWordPressRequests(): self
+        {
+        }
+        /**
+         * Determine if the application handles WordPress requests.
+         */
+        public function handlesWordPressRequests(): bool
+        {
+        }
+        /**
+         * Get the environment file path.
+         */
+        public function environmentPath(): string
+        {
+        }
+        /**
+         * Load global helper functions.
+         *
+         * @return void
+         */
+        protected function registerGlobalHelpers()
+        {
+        }
+        /**
+         * Set paths that are configurable by the developer.
+         *
+         * Supported path types:
+         * - app
+         * - bootstrap
+         * - config
+         * - database
+         * - lang
+         * - public
+         * - resources
+         * - storage
+         * - environment
+         *
+         * @return $this
+         */
+        public function usePaths(array $paths)
+        {
+        }
+        /**
+         * Bind all of the application paths in the container.
+         *
+         * @return void
+         */
+        protected function bindPathsInContainer()
+        {
+        }
+        /**
+         * Get the path to the bootstrap directory.
+         *
+         * @param  string  $path  Optionally, a path to append to the bootstrap path
+         * @return string
+         */
+        public function bootstrapPath($path = '')
+        {
+        }
+        /**
+         * Get the path to the resources directory.
+         *
+         * @param  string  $path
+         * @return string
+         */
+        public function resourcePath($path = '')
+        {
+        }
+        /**
+         * Set the resources directory.
+         *
+         * @param  string  $path
+         * @return $this
+         */
+        public function useResourcePath($path)
+        {
+        }
+        /**
+         * Register the basic bindings into the container.
+         *
+         * @return void
+         */
+        protected function registerBaseBindings()
+        {
+        }
+        /**
+         * Register the package manifest.
+         *
+         * @return void
+         */
+        protected function registerPackageManifest()
+        {
+        }
+        /**
+         * Determine if the application is currently down for maintenance.
+         *
+         * @return bool
+         */
+        public function isDownForMaintenance()
+        {
+        }
+        /**
+         * Register the core class aliases in the container.
+         *
+         * @return void
+         */
+        public function registerCoreContainerAliases()
+        {
+        }
+        /**
+         * Boot the given service provider.
+         *
+         * @return void
+         */
+        protected function bootProvider(\Illuminate\Support\ServiceProvider $provider)
+        {
+        }
+        /**
+         * Register all of the configured providers.
+         *
+         * @return void
+         */
+        public function registerConfiguredProviders()
+        {
+        }
+        /**
+         * Register a service provider with the application.
+         *
+         * @param  \Illuminate\Support\ServiceProvider|string  $provider
+         * @param  bool  $force
+         * @return \Illuminate\Support\ServiceProvider
+         */
+        public function register($provider, $force = false)
+        {
+        }
+        /**
+         * Skip booting service provider and log error.
+         *
+         * @param  \Illuminate\Support\ServiceProvider|string  $provider
+         */
+        protected function skipProvider($provider, \Throwable $e): \Illuminate\Support\ServiceProvider
+        {
+        }
+        /**
+         * Get the application namespace.
+         *
+         * @return string
+         *
+         * @throws \RuntimeException
+         */
+        public function getNamespace()
+        {
+        }
+        /**
+         * Get the composer.json file that's used by the application.
+         *
+         * This function will begin in the app path and walk up the
+         * directory structure until it finds a composer.json file.
+         *
+         * If one is not found, then it will assume that there's a
+         * composer.json file in the base path.
+         */
+        protected function getAppComposer(): string
+        {
+        }
+        /**
+         * Set the application namespace.
+         *
+         * @param  string  $namespace
+         * @return $this
+         */
+        public function useNamespace($namespace)
+        {
+        }
+        /**
+         * Get the version number of the application.
+         *
+         * @return string
+         */
+        public function version()
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Exceptions\Whoops {
+    class WhoopsHandler extends \Illuminate\Foundation\Exceptions\Whoops\WhoopsHandler
+    {
+        /**
+         * WordPress environment secrets.
+         *
+         * @var array
+         */
+        protected $secrets = ['DB_PASSWORD', 'DATABASE_URL', 'AUTH_KEY', 'SECURE_AUTH_KEY', 'LOGGED_IN_KEY', 'NONCE_KEY', 'AUTH_SALT', 'SECURE_AUTH_SALT', 'LOGGED_IN_SALT', 'NONCE_SALT'];
+        /**
+         * Create a new Whoops handler for debug mode.
+         *
+         * @return \Whoops\Handler\PrettyPageHandler
+         */
+        public function forDebug()
+        {
+        }
+        /**
+         * Registers WordPress context with the handler
+         *
+         * @param  \Whoops\Handler\PrettyPageHandler  $handler
+         * @return static
+         */
+        protected function registerWordPressData($handler)
+        {
+        }
+        /**
+         * Register the blacklist with the handler.
+         *
+         * @param  \Whoops\Handler\PrettyPageHandler  $handler
+         * @return static
+         */
+        protected function registerBlacklist($handler)
+        {
+        }
+    }
+    class WhoopsExceptionRenderer extends \Illuminate\Foundation\Exceptions\Whoops\WhoopsExceptionRenderer
+    {
+        /**
+         * Get the Whoops handler for the application.
+         *
+         * @return \Whoops\Handler\Handler
+         */
+        protected function whoopsHandler()
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Exceptions {
+    class SkipProviderException extends \InvalidArgumentException
+    {
+        /**
+         * Create a new exception.
+         *
+         * @return void
+         */
+        public function __construct(string $message = '', int $code = 0, ?\Throwable $previous = null, string $package = '')
+        {
+        }
+        /**
+         * Name of the provider's package.
+         *
+         * @var string
+         */
+        protected $package;
+        /**
+         * Set the name of the provider's package.
+         *
+         * @return void
+         */
+        public function setPackage(string $package)
+        {
+        }
+        /**
+         * Get the provider's package.
+         *
+         * @return string
+         */
+        public function package()
+        {
+        }
+        /**
+         * Report the exception.
+         *
+         * @return array
+         */
+        public function context()
+        {
+        }
+    }
+    class Handler extends \Illuminate\Foundation\Exceptions\Handler
+    {
+        /**
+         * Get the default context variables for logging.
+         *
+         * @return array
+         */
+        protected function context()
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Http {
+    class Kernel extends \Illuminate\Foundation\Http\Kernel
+    {
+        /**
+         * The bootstrap classes for the application.
+         *
+         * @var string[]
+         */
+        protected $bootstrappers = [\Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables::class, \Roots\Acorn\Bootstrap\LoadConfiguration::class, \Roots\Acorn\Bootstrap\HandleExceptions::class, \Roots\Acorn\Bootstrap\RegisterFacades::class, \Illuminate\Foundation\Bootstrap\RegisterProviders::class, \Illuminate\Foundation\Bootstrap\BootProviders::class];
+    }
+}
+namespace Roots\Acorn\Sage\Concerns {
+    trait FiltersBodyClass
+    {
+        /**
+         * Clean up the body class and append the page slug.
+         *
+         * Filter: body_class
+         *
+         * @param  array  $classes
+         * @return array
+         */
+        public function filterBodyClass($classes)
+        {
+        }
+    }
+    trait FiltersEnqueues
+    {
+        /**
+         * Add support for MJS.
+         *
+         * Filter: script_loader_tag
+         *
+         * @param  string  $tag
+         * @param  string  $handle
+         * @param  string  $src
+         * @return string
+         */
+        public function filterScriptLoaderTag($tag, $handle, $src)
+        {
+        }
+    }
+    trait FiltersTemplates
+    {
+        /**
+         * Use compiled Blade view when returning a template.
+         *
+         * Filter: {type}_template_hierarchy
+         *
+         * @param  array  $files
+         * @return string[] List of possible views
+         */
+        public function filterTemplateHierarchy($files)
+        {
+        }
+        /**
+         * Include compiled Blade view with data attached.
+         *
+         * Filter: template_include
+         *
+         * @param  string
+         * @return string
+         */
+        public function filterTemplateInclude($file)
+        {
+        }
+        /**
+         * Add Blade compatibility for theme templates.
+         *
+         * NOTE: Internally, WordPress interchangeably uses "page templates" "post templates" and "theme templates"
+         *
+         * Filter: theme_templates
+         *
+         * @return string[] List of theme templates
+         */
+        public function filterThemeTemplates($templates, $theme, $post, $postType)
+        {
+        }
+        /**
+         * We use the exact same technique as WordPress core for detecting template files.
+         *
+         * Caveat: we go infinite levels deep within the views folder.
+         *
+         * @see \WP_Theme::get_post_templates()
+         * @link https://github.com/WordPress/WordPress/blob/5.8.1/wp-includes/class-wp-theme.php#L1203-L1221
+         *
+         * @param  string  $postType
+         * @param  string  $textDomain
+         * @return string[]
+         */
+        protected function getTemplates($postType = '', $textDomain = '')
+        {
+        }
+    }
+    trait FiltersThePost
+    {
+        /**
+         * Attach global `$post` variable to Blade views.
+         *
+         * Filter: the_post
+         *
+         * @param  WP_Post  $post
+         * @return void
+         */
+        public function filterThePost($post)
+        {
+        }
+    }
+    trait FiltersViews
+    {
+        /**
+         * Search for a compiled Blade partial when resolving the comments template.
+         *
+         * Filter: comments_template
+         *
+         * @param  string  $file
+         * @return string Path to comments template
+         */
+        public function filterCommentsTemplate($file)
+        {
+        }
+        /**
+         * Use `forms/search.blade.php` for the search form.
+         *
+         * Filter: get_search_form
+         *
+         * @return string Rendered view
+         */
+        public function filterSearchForm($view)
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Sage {
+    class Sage
+    {
+        use \Roots\Acorn\Sage\Concerns\FiltersBodyClass;
+        use \Roots\Acorn\Sage\Concerns\FiltersEnqueues;
+        use \Roots\Acorn\Sage\Concerns\FiltersTemplates;
+        use \Roots\Acorn\Sage\Concerns\FiltersThePost;
+        use \Roots\Acorn\Sage\Concerns\FiltersViews;
+        /**
+         * The application implementation.
+         *
+         * @var ContainerContract
+         */
+        protected $app;
+        /**
+         * The ViewFinder instance.
+         *
+         * @var ViewFinder
+         */
+        protected $sageFinder;
+        /**
+         * The FileViewFinder instance.
+         *
+         * @var FileViewFinder
+         */
+        protected $fileFinder;
+        /**
+         * The View Factory instance.
+         *
+         * @var ViewFactory
+         */
+        protected $view;
+        /**
+         * The Filesystem instance.
+         */
+        protected \Roots\Acorn\Filesystem\Filesystem $files;
+        /**
+         * Creates a new Sage instance.
+         */
+        public function __construct(\Roots\Acorn\Filesystem\Filesystem $files, \Roots\Acorn\Sage\ViewFinder $sageFinder, \Roots\Acorn\View\FileViewFinder $fileFinder, \Illuminate\Contracts\View\Factory $view, \Illuminate\Contracts\Container\Container $app)
+        {
+        }
+        /**
+         * Get filter to be passed to WordPress
+         *
+         * @return array
+         */
+        public function filter($filter)
+        {
+        }
+    }
+    class ViewFinder
+    {
+        /**
+         * The FileViewFinder instance.
+         *
+         * @var FileViewFinder
+         */
+        protected $finder;
+        /**
+         * The Filesystem instance.
+         *
+         * @var Filesystem
+         */
+        protected $files;
+        /**
+         * Base path for theme or plugin in which views are located.
+         *
+         * @var string
+         */
+        protected $path;
+        /**
+         * Create new ViewFinder instance.
+         *
+         * @param  string  $path
+         * @return void
+         */
+        public function __construct(\Roots\Acorn\View\FileViewFinder $finder, \Roots\Acorn\Filesystem\Filesystem $files, $path = '')
+        {
+        }
+        /**
+         * Locate available view files.
+         *
+         * @param  mixed  $file
+         * @return array
+         */
+        public function locate($file)
+        {
+        }
+        /**
+         * Return the FileViewFinder instance.
+         *
+         * @return FileViewFinder
+         */
+        public function getFinder()
+        {
+        }
+        /**
+         * Return the Filesystem instance.
+         *
+         * @return Filesystem
+         */
+        public function getFilesystem()
+        {
+        }
+        /**
+         * Get list of view paths relative to the base path
+         *
+         * @return Collection
+         */
+        protected function getRelativeViewPaths()
+        {
+        }
+    }
+    class SageServiceProvider extends \Illuminate\Support\ServiceProvider
+    {
+        /**
+         * Register any application services.
+         *
+         * @return void
+         */
+        public function register()
+        {
+        }
+        /**
+         * Bootstrap any application services.
+         *
+         * @return void
+         */
+        public function boot()
+        {
+        }
+        /**
+         * Sage compatibility filters
+         *
+         * These are filters that are required for Sage features to operate correctly
+         *
+         * @return void
+         */
+        protected function bindCompatFilters()
+        {
+        }
+        /**
+         * Sage view filters
+         *
+         * These filters direct WordPress to views within Sage.
+         *
+         * @return void
+         */
+        protected function bindViewFilters()
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Filesystem {
+    class FilesystemServiceProvider extends \Illuminate\Filesystem\FilesystemServiceProvider
+    {
+        /**
+         * Register the Filesystem natively inside of the provider.
+         *
+         * @return void
+         */
+        protected function registerNativeFilesystem()
+        {
+        }
+    }
+    class Filesystem extends \Illuminate\Filesystem\Filesystem
+    {
+        /**
+         * Normalizes file path separators
+         *
+         * @param  mixed  $path
+         * @param  string  $separator
+         * @return mixed
+         */
+        public function normalizePath($path, $separator = '/')
+        {
+        }
+        /**
+         * Find the closest file up the directory tree.
+         *
+         * @param  string  $path
+         * @param  string  $file
+         * @return string|null
+         */
+        public function closest($path, $file)
+        {
+        }
+        /**
+         * Get relative path of target from specified base
+         *
+         * @param  string  $basePath
+         * @param  string  $targetPath
+         * @return string
+         *
+         * @copyright Fabien Potencier
+         * @license   MIT
+         *
+         * @link      https://github.com/symfony/routing/blob/v4.1.1/Generator/UrlGenerator.php#L280-L329
+         */
+        public function getRelativePath($basePath, $targetPath)
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Providers {
+    class QueueServiceProvider extends \Illuminate\Support\ServiceProvider
+    {
+        /**
+         * Register services.
+         *
+         * @return void
+         */
+        public function register()
+        {
+        }
+        /**
+         * Bootstrap services.
+         *
+         * @return void
+         */
+        public function boot()
+        {
+        }
+    }
+    class AcornServiceProvider extends \Illuminate\Support\ServiceProvider
+    {
+        /**
+         * Core configs.
+         *
+         * @var string[]
+         */
+        protected $configs = ['app', 'services'];
+        /**
+         * Provider configs.
+         *
+         * @var string[]
+         */
+        protected $providerConfigs = [\Illuminate\Auth\AuthServiceProvider::class => 'auth', \Illuminate\Broadcasting\BroadcastServiceProvider::class => 'broadcasting', \Illuminate\Cache\CacheServiceProvider::class => 'cache', \Illuminate\Database\DatabaseServiceProvider::class => 'database', \Illuminate\Filesystem\FilesystemServiceProvider::class => 'filesystems', \Illuminate\Hashing\HashServiceProvider::class => 'hashing', \Illuminate\Log\LogServiceProvider::class => 'logging', \Illuminate\Mail\MailServiceProvider::class => 'mail', \Illuminate\Queue\QueueServiceProvider::class => 'queue', \Illuminate\Session\SessionServiceProvider::class => 'session', \Illuminate\View\ViewServiceProvider::class => 'view', \Roots\Acorn\Assets\AssetsServiceProvider::class => 'assets'];
+        /**
+         * Register services.
+         *
+         * @return void
+         */
+        public function register()
+        {
+        }
+        /**
+         * Bootstrap services.
+         *
+         * @return void
+         */
+        public function boot()
+        {
+        }
+        /**
+         * Add a header.
+         *
+         * Disable with `add_filter('acorn/powered_by', '__return_false');`
+         *
+         * @return void
+         */
+        protected function poweredBy()
+        {
+        }
+        /**
+         * Publish application files.
+         *
+         * @return void
+         */
+        protected function registerPublishables()
+        {
+        }
+        /**
+         * Publish application configs.
+         *
+         * @return void
+         */
+        protected function publishConfigs()
+        {
+        }
+        /**
+         * Filters out providers that aren't registered
+         *
+         * @return string[]
+         */
+        protected function filterPublishableConfigs()
+        {
+        }
+        /**
+         * Remove zeroconf storage directory after running acorn:init.
+         *
+         * @return void
+         */
+        protected function registerPostInitEvent()
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Assets\Exceptions {
+    class ManifestNotFoundException extends \Exception
+    {
+        //
+    }
+    class BundleNotFoundException extends \Exception
+    {
+        //
+    }
+}
+namespace Roots\Acorn\Assets\Contracts {
+    interface Manifest
+    {
+        /**
+         * Get an asset object from the Manifest
+         *
+         * @param  string  $key
+         */
+        public function asset($key): \Roots\Acorn\Assets\Contracts\Asset;
+        /**
+         * Get an asset bundle from the Manifest
+         *
+         * @param  string  $key
+         */
+        public function bundle($key): \Roots\Acorn\Assets\Contracts\Bundle;
+    }
+}
+namespace Roots\Acorn\Assets {
+    class Manifest implements \Roots\Acorn\Assets\Contracts\Manifest
+    {
+        /**
+         * The manifest assets.
+         *
+         * @var array
+         */
+        protected $assets;
+        /**
+         * The manifest bundles.
+         *
+         * @var array
+         */
+        protected $bundles;
+        /**
+         * The manifest path.
+         *
+         * @var string
+         */
+        protected $path;
+        /**
+         * The manifest URI.
+         *
+         * @var string
+         */
+        protected $uri;
+        /**
+         * Create a new manifest instance.
+         */
+        public function __construct(string $path, string $uri, array $assets = [], ?array $bundles = null)
+        {
+        }
+        /**
+         * Get specified asset.
+         *
+         * @param  string  $key
+         */
+        public function asset($key): \Roots\Acorn\Assets\Contracts\Asset
+        {
+        }
+        /**
+         * Get specified bundles.
+         *
+         * @param  string  $key
+         *
+         * @throws \Roots\Acorn\Assets\Exceptions\BundleNotFoundException
+         */
+        public function bundle($key): \Roots\Acorn\Assets\Contracts\Bundle
+        {
+        }
+        /**
+         * Normalizes to forward slashes and removes leading slash.
+         */
+        protected function normalizeRelativePath(string $path): string
+        {
+        }
+    }
+    class AssetFactory
+    {
+        /**
+         * Create Asset instance.
+         *
+         * @param  string  $path  Local path
+         * @param  string  $uri  Remote URI
+         * @param  string  $type  Asset type
+         */
+        public static function create(string $path, string $uri, ?string $type = null): \Roots\Acorn\Assets\Contracts\Asset
+        {
+        }
+        /**
+         * Convert an asset to another asset type.
+         */
+        public static function convert(\Roots\Acorn\Assets\Contracts\Asset $asset, string $type): \Roots\Acorn\Assets\Contracts\Asset
+        {
+        }
+        /**
+         * Create Asset instance.
+         */
+        protected static function createAsset(string $path, string $uri): \Roots\Acorn\Assets\Asset\Asset
+        {
+        }
+        /**
+         * Create JsonAsset instance.
+         */
+        protected static function createJsonAsset(string $path, string $uri): \Roots\Acorn\Assets\Asset\JsonAsset
+        {
+        }
+        /**
+         * Create PhpAsset instance.
+         */
+        protected static function createPhpAsset(string $path, string $uri): \Roots\Acorn\Assets\Asset\PhpAsset
+        {
+        }
+        /**
+         * Create SvgAsset instance.
+         */
+        protected static function createSvgAsset(string $path, string $uri): \Roots\Acorn\Assets\Asset\SvgAsset
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Assets\Contracts {
+    interface Asset
+    {
+        /**
+         * Get the asset's remote URI
+         *
+         * Example: https://example.com/app/themes/sage/dist/styles/a1b2c3.min.css
+         */
+        public function uri(): string;
+        /**
+         * Get the asset's local path
+         *
+         * Example: /srv/www/example.com/current/web/app/themes/sage/dist/styles/a1b2c3.min.css
+         */
+        public function path(): string;
+        /**
+         * Check whether the asset exists on the file system
+         */
+        public function exists(): bool;
+        /**
+         * Get the contents of the asset
+         *
+         * @return mixed
+         */
+        public function contents();
+        /**
+         * Get the relative path to the asset.
+         *
+         * @param  string  $base_path  Base path to use for relative path.
+         */
+        public function relativePath(string $base_path): string;
+        /**
+         * Get data URL of asset.
+         *
+         * @return string
+         */
+        public function dataUrl();
+    }
+}
+namespace Roots\Acorn\Assets\Asset {
+    class Asset implements \Roots\Acorn\Assets\Contracts\Asset
+    {
+        /**
+         * The local asset path.
+         *
+         * @var string
+         */
+        protected $path;
+        /**
+         * The remote asset URI.
+         *
+         * @var string
+         */
+        protected $uri;
+        /**
+         * The asset MIME content type.
+         *
+         * @var string
+         */
+        protected $type;
+        /**
+         * The asset base64-encoded contents.
+         *
+         * @var string
+         */
+        protected $base64;
+        /**
+         * The asset data URL.
+         *
+         * @var string
+         */
+        protected $dataUrl;
+        /**
+         * Get asset from manifest
+         *
+         * @param  string  $path  Local path
+         * @param  string  $uri  Remote URI
+         */
+        public function __construct(string $path, string $uri)
+        {
+        }
+        /** {@inheritdoc} */
+        public function uri(): string
+        {
+        }
+        /** {@inheritdoc} */
+        public function path(): string
+        {
+        }
+        /** {@inheritdoc} */
+        public function exists(): bool
+        {
+        }
+        /** {@inheritdoc} */
+        public function contents(): string
+        {
+        }
+        /**
+         * Get the relative path to the asset.
+         *
+         * @param  string  $basePath  Base path to use for relative path.
+         */
+        public function relativePath(string $basePath): string
+        {
+        }
+        /**
+         * Get the base64-encoded contents of the asset.
+         *
+         * @return string
+         */
+        public function base64()
+        {
+        }
+        /**
+         * Get data URL of asset.
+         *
+         * @param  string  $mediatype  MIME content type
+         */
+        public function dataUrl(?string $mediatype = null): string
+        {
+        }
+        /**
+         * Get data URL of asset.
+         *
+         * @param  string  $mediatype  MIME content type
+         */
+        public function dataUri(?string $mediatype = null): string
+        {
+        }
+        /**
+         * Get the MIME content type.
+         *
+         * @return string|false
+         */
+        public function contentType()
+        {
+        }
+        /**
+         * Get the MIME content type.
+         *
+         * @return string|false
+         */
+        public function mimeType()
+        {
+        }
+        /**
+         * Get SplFileInfo instance of asset.
+         *
+         * @return SplFileInfo
+         */
+        public function file()
+        {
+        }
+        /** {@inheritdoc} */
+        public function __toString()
+        {
+        }
+    }
+    class PhpAsset extends \Roots\Acorn\Assets\Asset\Asset
+    {
+        /**
+         * Get the returned value of the asset
+         *
+         * @return mixed
+         */
+        public function requireOnce()
+        {
+        }
+        /**
+         * Get the returned value of the asset
+         *
+         * @return mixed
+         */
+        public function require()
+        {
+        }
+        /**
+         * Get the returned value of the asset
+         *
+         * @return mixed
+         */
+        public function includeOnce()
+        {
+        }
+        /**
+         * Get the returned value of the asset
+         *
+         * @return mixed
+         */
+        public function include()
+        {
+        }
+        /**
+         * Assert that the asset exists.
+         *
+         * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+         */
+        protected function assertExists()
+        {
+        }
+    }
+    class TextAsset extends \Roots\Acorn\Assets\Asset\Asset
+    {
+        /**
+         * Character encoding
+         *
+         * @var string
+         */
+        protected $charset;
+        /**
+         * Get character encoding.
+         *
+         * @param  string  $fallback  Fallback if charset cannot be determined
+         */
+        public function charset($fallback = 'UTF-8'): string
+        {
+        }
+        /**
+         * Get data URL of asset.
+         *
+         * @param  string  $mediatype  MIME content type
+         * @param  string  $charset  Character encoding
+         * @param  string  $urlencode  List of characters to be percent-encoded
+         */
+        public function dataUrl(?string $mediatype = null, ?string $charset = null, string $urlencode = '%\'"'): string
+        {
+        }
+        /**
+         * Get data URL of asset.
+         *
+         * @param  string  $mediatype  MIME content type
+         * @param  string  $charset  Character encoding
+         * @param  string  $urlencode  List of characters to be percent-encoded
+         */
+        public function dataUri(?string $mediatype = null, ?string $charset = null, string $urlencode = '%\'"'): string
+        {
+        }
+    }
+    class JsonAsset extends \Roots\Acorn\Assets\Asset\TextAsset implements \Illuminate\Contracts\Support\Arrayable, \Illuminate\Contracts\Support\Jsonable
+    {
+        /**
+         * {@inheritdoc}
+         */
+        public function toJson($options = \JSON_UNESCAPED_SLASHES)
+        {
+        }
+        /**
+         * {@inheritdoc}
+         */
+        public function toArray(): array
+        {
+        }
+        /**
+         * Decode JSON data.
+         *
+         * @param  int  $options
+         * @param  int  $depth
+         * @return array|null
+         */
+        public function decode($options = 0, $depth = 512)
+        {
+        }
+    }
+    class SvgAsset extends \Roots\Acorn\Assets\Asset\TextAsset
+    {
+        public function contentType()
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Assets\Contracts {
+    interface Bundle
+    {
+        public function css();
+        public function js();
+        public function runtime();
+    }
+}
+namespace Roots\Acorn\Assets\Concerns {
+    trait Conditional
+    {
+        /**
+         * Conditionally load assets.
+         *
+         * @var bool
+         */
+        protected $conditional = true;
+        /**
+         * Set conditional loading.
+         *
+         * @param  bool|callable  $conditional
+         * @return $this
+         */
+        public function when($conditional, ...$args)
+        {
+        }
+    }
+    trait Enqueuable
+    {
+        /**
+         * Resolved inline sources.
+         *
+         * @var array
+         */
+        protected static $inlined = [];
+        /**
+         * Get JS files in bundle.
+         *
+         * Optionally pass a function to execute on each JS file.
+         *
+         * @return Collection|$this
+         */
+        abstract public function js(?callable $callable = null);
+        /**
+         * Get CSS files in bundle.
+         *
+         * Optionally pass a function to execute on each CSS file.
+         *
+         * @return Collection|$this
+         */
+        abstract public function css(?callable $callable = null);
+        abstract public function runtime();
+        abstract public function runtimeSource();
+        /**
+         * Enqueue CSS files in WordPress.
+         *
+         * @return $this
+         */
+        public function enqueueCss(string $media = 'all', array $dependencies = [])
+        {
+        }
+        /**
+         * Enqueue JS files in WordPress.
+         *
+         * @return $this
+         */
+        public function enqueueJs(bool|array $args = true, array $dependencies = [])
+        {
+        }
+        /**
+         * Enqueue JS and CSS files in WordPress.
+         *
+         * @return $this
+         */
+        public function enqueue()
+        {
+        }
+        /**
+         * Add CSS files as editor styles in WordPress.
+         *
+         * @return $this
+         */
+        public function editorStyles()
+        {
+        }
+        /**
+         * Dequeue CSS files in WordPress.
+         *
+         * @return $this
+         */
+        public function dequeueCss()
+        {
+        }
+        /**
+         * Dequeue JS files in WordPress.
+         *
+         * @return $this
+         */
+        public function dequeueJs()
+        {
+        }
+        /**
+         * Dequeue JS and CSS files in WordPress.
+         *
+         * @return $this
+         */
+        public function dequeue()
+        {
+        }
+        /**
+         * Inline runtime.js in WordPress.
+         *
+         * @return $this
+         */
+        public function inlineRuntime()
+        {
+        }
+        /**
+         * Add an inline script before or after the bundle loads
+         *
+         * @param  string  $contents
+         * @param  string  $position
+         * @return $this
+         */
+        public function inline($contents, $position = 'after')
+        {
+        }
+        /**
+         * Add localization data to be used by the bundle
+         *
+         * @param  string  $name
+         * @param  array  $object
+         * @return $this
+         */
+        public function localize($name, $object)
+        {
+        }
+        /**
+         * Add script translations to be used by the bundle
+         *
+         * @param  string  $domain
+         * @param  string  $path
+         * @return $this
+         */
+        public function translate($domain = null, $path = null)
+        {
+        }
+        /**
+         * Merge two or more arrays.
+         *
+         * @return void
+         */
+        protected function mergeDependencies(array &$dependencies, array ...$moreDependencies)
+        {
+        }
+        /**
+         * Reset inlined sources.
+         *
+         * @internal
+         *
+         * @return void
+         */
+        public static function resetInlinedSources()
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Assets {
+    class Bundle implements \Roots\Acorn\Assets\Contracts\Bundle
+    {
+        use \Roots\Acorn\Assets\Concerns\Conditional, \Roots\Acorn\Assets\Concerns\Enqueuable;
+        /**
+         * The bundle ID.
+         *
+         * @var string
+         */
+        protected $id;
+        /**
+         * The bundle path.
+         *
+         * @var string
+         */
+        protected $path;
+        /**
+         * The bundle URI.
+         *
+         * @var string
+         */
+        protected $uri;
+        /**
+         * The bundle runtime.
+         *
+         * @var string|null
+         */
+        protected $runtime;
+        /**
+         * The bundle contents.
+         *
+         * @var array
+         */
+        protected $bundle;
+        /**
+         * The bundle runtimes.
+         *
+         * @var array
+         */
+        protected static $runtimes = [];
+        /**
+         * Create a new bundle.
+         */
+        public function __construct(string $id, array $bundle, string $path, string $uri = '/')
+        {
+        }
+        /**
+         * Get CSS files in bundle.
+         *
+         * Optionally pass a function to execute on each CSS file.
+         *
+         * @return Collection|$this
+         */
+        public function css(?callable $callable = null)
+        {
+        }
+        /**
+         * Get JS files in bundle.
+         *
+         * Optionally pass a function to execute on each JS file.
+         *
+         * @return Collection|$this
+         */
+        public function js(?callable $callable = null)
+        {
+        }
+        /**
+         * Get the bundle dependencies.
+         *
+         * @return array
+         */
+        public function dependencies()
+        {
+        }
+        /**
+         * Get the bundle runtime.
+         *
+         * @return string|null
+         */
+        public function runtime()
+        {
+        }
+        /**
+         * Get bundle runtime contents.
+         *
+         * @return string|null
+         */
+        public function runtimeSource()
+        {
+        }
+        /**
+         * Get the bundle URL.
+         *
+         * @return string
+         */
+        protected function getUrl(string $path)
+        {
+        }
+        /**
+         * Set the bundle runtime.
+         *
+         * @return void
+         */
+        protected function setRuntime()
+        {
+        }
+        /**
+         * Retrieve the runtime in a bundle.
+         *
+         * @return string|null
+         */
+        protected function getBundleRuntime(string $type = 'js')
+        {
+        }
+    }
+    /**
+     * Manage assets manifests
+     *
+     * @see \Illuminate\Support\Manager
+     * @link https://github.com/illuminate/support/blob/8.x/Manager.php
+     */
+    class Manager
+    {
+        /**
+         * Resolved manifests
+         *
+         * @var ManifestContract[]
+         */
+        protected $manifests;
+        /**
+         * Assets Config
+         *
+         * @var array
+         */
+        protected $config;
+        /**
+         * Manifest middleware.
+         *
+         * @var string[]
+         */
+        protected $middleware = [\Roots\Acorn\Assets\Middleware\RootsBudMiddleware::class, \Roots\Acorn\Assets\Middleware\ViteMiddleware::class, \Roots\Acorn\Assets\Middleware\LaravelMixMiddleware::class];
+        /**
+         * Initialize the AssetManager instance.
+         *
+         * @param  Container  $container
+         */
+        public function __construct($config = [])
+        {
+        }
+        /**
+         * Register the given manifest
+         *
+         * @param  Manifest  $manifest
+         * @return static
+         */
+        public function register(string $name, \Roots\Acorn\Assets\Contracts\Manifest $manifest): self
+        {
+        }
+        /**
+         * Get a Manifest
+         */
+        public function manifest(string $name, ?array $config = null): \Roots\Acorn\Assets\Contracts\Manifest
+        {
+        }
+        /**
+         * Resolve the given manifest.
+         *
+         *
+         * @throws InvalidArgumentException
+         */
+        protected function resolve(string $name, ?array $config): \Roots\Acorn\Assets\Contracts\Manifest
+        {
+        }
+        /**
+         * Manifest config pipeline.
+         */
+        protected function pipeline(array $config): array
+        {
+        }
+        /**
+         * Opens a JSON manifest file from the local file system
+         *
+         * @param  string  $jsonManifest  Path to .json file
+         */
+        protected function getJsonManifest(string $jsonManifest): array
+        {
+        }
+        /**
+         * Get the assets manifest configuration.
+         */
+        protected function getConfig(string $name): array
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Assets\View {
+    class BladeDirective
+    {
+        /**
+         * Invoke the @asset directive.
+         *
+         * @param  string  $expression
+         * @return string
+         */
+        public function __invoke($expression)
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Assets {
+    class Vite extends \Illuminate\Foundation\Vite
+    {
+        /**
+         * Generate an asset path for the application.
+         *
+         * @param  string  $path
+         * @param  bool|null  $secure
+         * @return string
+         */
+        protected function assetPath($path, $secure = null)
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Assets\Contracts {
+    /**
+     * @deprecated 4.0.0 -- This has been moved to `Roots\Acorn\Assets\Exceptions\ManifestNotFoundException`
+     */
+    class ManifestNotFoundException extends \Exception
+    {
+        //
+    }
+}
+namespace Roots\Acorn\Assets {
+    class AssetsServiceProvider extends \Illuminate\Support\ServiceProvider
+    {
+        /**
+         * Register services.
+         *
+         * @return void
+         */
+        public function register()
+        {
+        }
+        /**
+         * Bootstrap services.
+         *
+         * @return void
+         */
+        public function boot()
+        {
+        }
+        /**
+         * Get the default manifest.
+         *
+         * @return string
+         */
+        protected function getDefaultManifest()
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Assets\Middleware {
+    class LaravelMixMiddleware
+    {
+        /**
+         * Handle the manifest config.
+         *
+         * @param  array  $config
+         * @return array
+         */
+        public function handle($config)
+        {
+        }
+        /**
+         * Get the URI to a Mix hot module replacement server.
+         *
+         * @link https://laravel-mix.com/docs/hot-module-replacement
+         */
+        protected function getMixHotUri(string $path): ?string
+        {
+        }
+    }
+    class ViteMiddleware
+    {
+        /**
+         * Handle the manifest config.
+         *
+         * @param  array  $config
+         * @return array
+         */
+        public function handle($config)
+        {
+        }
+    }
+    class RootsBudMiddleware
+    {
+        /**
+         * The Bud dev server origin header.
+         *
+         * @var string
+         */
+        protected $devOrigin;
+        /**
+         * Create a new Bud middleware instance.
+         *
+         * @return void
+         */
+        public function __construct(?string $devOrigin = null)
+        {
+        }
+        /**
+         * Handle the manifest config.
+         *
+         * @param  array  $config
+         * @return array
+         */
+        public function handle($config)
+        {
+        }
+        /**
+         * Get the URI to a Bud hot module replacement server.
+         *
+         * @link https://budjs.netlify.app/docs/bud.serve
+         */
+        protected function getBudDevUri(string $path): ?string
+        {
+        }
+        /**
+         * Get the Bud dev server origin header.
+         *
+         * @return string|null|false
+         */
+        protected function getDevOriginHeader()
+        {
+        }
+    }
+}
+namespace Roots\Acorn {
+    class DefaultProviders extends \Illuminate\Support\DefaultProviders
+    {
+        /**
+         * The Acorn providers.
+         */
+        protected array $acornProviders = [\Roots\Acorn\Assets\AssetsServiceProvider::class, \Roots\Acorn\Filesystem\FilesystemServiceProvider::class, \Roots\Acorn\Providers\AcornServiceProvider::class, \Roots\Acorn\Providers\QueueServiceProvider::class, \Roots\Acorn\View\ViewServiceProvider::class];
+        /**
+         * The additional framework providers.
+         */
+        protected array $additionalProviders = [\Illuminate\Foundation\Providers\FoundationServiceProvider::class, \Illuminate\Foundation\Providers\ComposerServiceProvider::class, \Illuminate\Database\MigrationServiceProvider::class];
+        /**
+         * The disallowed providers.
+         */
+        protected array $disallowedProviders = [\Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class, \Illuminate\View\ViewServiceProvider::class];
+        /**
+         * Create a new default provider collection.
+         *
+         * @return void
+         */
+        public function __construct(?array $providers = null)
+        {
+        }
+    }
+    class ComposerScripts extends \Illuminate\Foundation\ComposerScripts
+    {
+        /**
+         * Clear the cached Laravel bootstrapping files.
+         *
+         * @return void
+         */
+        protected static function clearCompiled()
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Bootstrap {
+    class HandleExceptions extends \Illuminate\Foundation\Bootstrap\HandleExceptions
+    {
+        /**
+         * Bootstrap the given application.
+         *
+         * @param  \Roots\Acorn\Application  $app
+         * @return void
+         */
+        public function bootstrap(\Illuminate\Contracts\Foundation\Application $app)
+        {
+        }
+        /**
+         * Report PHP deprecations, or convert PHP errors to ErrorException instances.
+         *
+         * @param  int  $level
+         * @param  string  $message
+         * @param  string  $file
+         * @param  int  $line
+         * @param  array  $context
+         * @return void|false
+         *
+         * @throws \ErrorException
+         */
+        public function handleError($level, $message, $file = '', $line = 0, $context = [])
+        {
+        }
+        /**
+         * Determine whether application debugging is enabled.
+         *
+         * @return bool
+         */
+        protected function isDebug()
+        {
+        }
+        /**
+         * Determine whether a fatal error handler drop-in exists.
+         *
+         * @return bool
+         */
+        protected function hasHandler()
+        {
+        }
+        /**
+         * Render an exception as an HTTP response and send it.
+         *
+         * @return void
+         */
+        protected function renderHttpResponse(\Throwable $e)
+        {
+        }
+    }
+    class LoadConfiguration extends \Illuminate\Foundation\Bootstrap\LoadConfiguration
+    {
+        /**
+         * Bootstrap the given application.
+         *
+         * @return void
+         */
+        public function bootstrap(\Illuminate\Contracts\Foundation\Application $app)
+        {
+        }
+    }
+    class RegisterFacades
+    {
+        /**
+         * Bootstrap the given application.
+         *
+         * @return void
+         */
+        public function bootstrap(\Roots\Acorn\Application $app)
+        {
+        }
+    }
+}
+namespace Roots\Acorn\View {
+    class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
+    {
+        /**
+         * Register any application services.
+         *
+         * @return void
+         */
+        public function register()
+        {
+        }
+        /**
+         * Bootstrap any application services.
+         *
+         * @return void
+         */
+        public function boot()
+        {
+        }
+        /**
+         * Return an instance of View.
+         *
+         * @return View
+         */
+        protected function view()
+        {
+        }
+        /**
+         * Register View Finder
+         *
+         * @return void
+         */
+        public function registerViewFinder()
+        {
+        }
+        /**
+         * Register View Macros
+         *
+         * @return void
+         */
+        public function registerMacros()
+        {
+        }
+        /**
+         * Attach View Directives
+         *
+         * @return void
+         */
+        public function attachDirectives()
+        {
+        }
+        /**
+         * Attach View Components
+         *
+         * @return void
+         */
+        public function attachComponents()
+        {
+        }
+        /**
+         * Attach View Composers
+         *
+         * @return void
+         */
+        public function attachComposers()
+        {
+        }
+        /**
+         * Attach View Debugger
+         *
+         * @return void
+         */
+        public function attachDebugger()
+        {
+        }
+    }
+    class FileViewFinder extends \Illuminate\View\FileViewFinder
+    {
+        /**
+         * Get possible relative locations of view files
+         *
+         * @param  string  $path  Absolute or relative path to possible view file
+         * @return string[]
+         */
+        public function getPossibleViewFilesFromPath($path)
+        {
+        }
+        /**
+         * Get possible view name based on path
+         *
+         * @param  string  $path  Absolute or relative path to possible view file
+         * @return string
+         */
+        public function getPossibleViewNameFromPath($file)
+        {
+        }
+        /**
+         * Remove recognized extensions from path
+         *
+         * @param  string  $file  relative path to view file
+         * @return string view name
+         */
+        protected function stripExtensions($path)
+        {
+        }
+        /**
+         * Normalize paths
+         *
+         * @param  string|string[]  $path
+         * @param  string  $separator
+         * @return string|string[]
+         */
+        protected function normalizePath($path, $separator = '/')
+        {
+        }
+    }
+    abstract class Component extends \Illuminate\View\Component
+    {
+        /**
+         * Get the evaluated view contents for the given view.
+         *
+         * @param  string|null  $view
+         * @param  Arrayable|array  $data
+         * @param  array  $mergeData
+         * @return View|Factory
+         */
+        public function view($view = null, $data = [], $mergeData = [])
+        {
+        }
+    }
+}
+namespace Roots\Acorn\View\Composers {
+    class Debugger
+    {
+        /**
+         * Create a new Debugger instance.
+         */
+        public function __construct(\Roots\Acorn\Application $app)
+        {
+        }
+        /**
+         * Compose the view before rendering.
+         *
+         * @param  View  $view
+         * @return void
+         */
+        public function compose($view)
+        {
+        }
+    }
+}
+namespace Roots\Acorn\View\Composers\Concerns {
+    trait AcfFields
+    {
+        /**
+         * ACF data to be passed to the view before rendering.
+         *
+         * @param  int  $postId
+         * @return array
+         */
+        protected function fields($postId = null)
+        {
+        }
+    }
+    trait Cacheable
+    {
+        /**
+         * Cache expiration
+         *
+         * If no expiration is specified, the values will be cached forever.
+         *
+         * @var int|float
+         */
+        protected $cache_expiration;
+        /**
+         * Cache key
+         *
+         * If no key is specified, the key will default to the class name and post ID
+         *
+         * @var string
+         */
+        protected $cache_key;
+        /**
+         * Cache tags
+         *
+         * If no tags are specified, the tags will be class name, post ID, and post type
+         *
+         * @var string[]
+         */
+        protected $cache_tags;
+        /**
+         * Cache helper
+         *
+         * @param  dynamic  key|key,value|key-values|null
+         * @return mixed
+         *
+         * @throws BadMethodCallException
+         */
+        public function cache()
+        {
+        }
+        /**
+         * Forget cache data
+         *
+         * @param  string  $key
+         * @return void
+         */
+        protected function forget($key = null)
+        {
+        }
+        /**
+         * Flush all cache data
+         *
+         * If tags are supported, then only the tags will be flushed
+         *
+         * @return void
+         */
+        protected function flush()
+        {
+        }
+        /**
+         * Data to be merged and passed to the view before rendering.
+         *
+         * @return array
+         */
+        protected function merge()
+        {
+        }
+    }
+    trait Arrayable
+    {
+        /**
+         * Map the public class methods to an array.
+         *
+         * @return array
+         */
+        public function toArray()
+        {
+        }
+    }
+    /**
+     * Extract public properties from a composer to make available in a view.
+     *
+     * @copyright Taylor Otwell
+     *
+     * @link https://github.com/illuminate/view/blob/v10.35.0/Component.php#L220-L342
+     */
+    trait Extractable
+    {
+        /**
+         * The cache of public property names, keyed by class.
+         *
+         * @var array
+         */
+        protected static $propertyCache = [];
+        /**
+         * The cache of public method names, keyed by class.
+         *
+         * @var array
+         */
+        protected static $methodCache = [];
+        /**
+         * Extract the public properties for the class.
+         *
+         * @return array
+         */
+        protected function extractPublicProperties()
+        {
+        }
+        /**
+         * Extract the public methods for the class.
+         *
+         * @return array
+         */
+        protected function extractPublicMethods()
+        {
+        }
+        /**
+         * Create a callable variable from the given method.
+         *
+         * @return mixed
+         */
+        protected function createVariableFromMethod(\ReflectionMethod $method)
+        {
+        }
+        /**
+         * Create an invokable, toStringable variable for the given class method.
+         *
+         * @return \Illuminate\View\InvokableComponentVariable
+         */
+        protected function createInvokableVariable(string $method)
+        {
+        }
+    }
+}
+namespace Roots\Acorn\View {
+    abstract class Composer
+    {
+        use \Roots\Acorn\View\Composers\Concerns\Extractable;
+        /**
+         * The list of views served by this composer.
+         *
+         * @var string[]
+         */
+        protected static $views;
+        /**
+         * The current view instance.
+         *
+         * @var \Illuminate\View\View
+         */
+        protected $view;
+        /**
+         * The current view data.
+         *
+         * @var \Illuminate\Support\Fluent
+         */
+        protected $data;
+        /**
+         * The properties / methods that should not be exposed.
+         *
+         * @var array
+         */
+        protected $except = [];
+        /**
+         * The default properties / methods that should not be exposed.
+         *
+         * @var array
+         */
+        protected $defaultExcept = ['cache', 'compose', 'override', 'toArray', 'views', 'with'];
+        /**
+         * The list of views served by this composer.
+         *
+         * @return string|string[]
+         */
+        public static function views()
+        {
+        }
+        /**
+         * Compose the view before rendering.
+         *
+         * @return void
+         */
+        public function compose(\Illuminate\View\View $view)
+        {
+        }
+        /**
+         * The merged data to be passed to view before rendering.
+         *
+         * @return array
+         */
+        protected function merge()
+        {
+        }
+        /**
+         * The data passed to the view before rendering.
+         *
+         * @return array
+         */
+        protected function with()
+        {
+        }
+        /**
+         * The override data passed to the view before rendering.
+         *
+         * @return array
+         */
+        protected function override()
+        {
+        }
+        /**
+         * Determine if the given property / method should be ignored.
+         *
+         * @param  string  $name
+         * @return bool
+         */
+        protected function shouldIgnore($name)
+        {
+        }
+        /**
+         * Get the methods that should be ignored.
+         *
+         * @return array
+         */
+        protected function ignoredMethods()
+        {
+        }
+    }
+}
+namespace Roots\Acorn {
+    final class ServiceProvider extends \Illuminate\Support\ServiceProvider
+    {
+        /**
+         * Get the default providers for a Acorn application.
+         *
+         * @return \Roots\Acorn\DefaultProviders
+         */
+        public static function defaultProviders()
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Configuration {
+    class Middleware extends \Illuminate\Foundation\Configuration\Middleware
+    {
+        /**
+         * Get the middleware aliases.
+         *
+         * @return array
+         */
+        public function getMiddlewareAliases()
+        {
+        }
+        /**
+         * Get the global middleware.
+         *
+         * @return array
+         */
+        public function getGlobalMiddleware()
+        {
+        }
+        /**
+         * Modify the middleware in the "wordpress" group.
+         *
+         * @return $this
+         */
+        public function wordpress(array|string $append = [], array|string $prepend = [], array|string $remove = [], array $replace = [])
+        {
+        }
+        /**
+         * Get the middleware groups.
+         *
+         * @return array
+         */
+        public function getMiddlewareGroups()
+        {
+        }
+        /**
+         * Get the default middleware aliases.
+         *
+         * @return array
+         */
+        protected function defaultAliases()
+        {
+        }
+    }
+    class Exceptions extends \Illuminate\Foundation\Configuration\Exceptions
+    {
+        //
+    }
+}
+namespace Roots\Acorn\Configuration\Concerns {
+    trait Paths
+    {
+        /**
+         * Infer the application's base directory from the environment.
+         *
+         * @return string
+         */
+        public static function inferBasePath()
+        {
+        }
+        /**
+         * Register and configure the application's paths.
+         *
+         * @return $this
+         */
+        public function withPaths(?string $app = null, ?string $config = null, ?string $storage = null, ?string $resources = null, ?string $public = null, ?string $bootstrap = null, ?string $lang = null, ?string $database = null)
+        {
+        }
+        /**
+         * Use the configured default paths.
+         */
+        public function defaultPaths(): array
+        {
+        }
+        /**
+         * Normalize a relative or absolute path to an application directory.
+         */
+        protected function normalizeApplicationPath(string $path, ?string $default = null): string
+        {
+        }
+        /**
+         * Find a path that is configurable by the developer.
+         */
+        protected function findPath(string $path): string
+        {
+        }
+        /**
+         * Fallbacks for path types.
+         */
+        protected function fallbackPath(string $path): string
+        {
+        }
+        /**
+         * Ensure that all of the storage directories exist.
+         */
+        protected function fallbackStoragePath(): string
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Configuration {
+    class ApplicationBuilder extends \Illuminate\Foundation\Configuration\ApplicationBuilder
+    {
+        use \Roots\Acorn\Configuration\Concerns\Paths;
+        /**
+         * The application builder configuration.
+         */
+        protected array $config = [];
+        /**
+         * Register the standard kernel classes for the application.
+         *
+         * @return $this
+         */
+        public function withKernels()
+        {
+        }
+        /**
+         * Register and configure the application's exception handler.
+         *
+         * @return $this
+         */
+        public function withExceptions(?callable $using = null)
+        {
+        }
+        /**
+         * Register the routing services for the application.
+         *
+         * @return $this
+         */
+        public function withRouting(?\Closure $using = null, array|string|null $web = null, array|string|null $api = null, ?string $commands = null, ?string $channels = null, ?string $pages = null, ?string $health = null, string $apiPrefix = 'api', ?callable $then = null, bool $wordpress = false)
+        {
+        }
+        /**
+         * Register the global middleware, middleware groups, and middleware aliases for the application.
+         *
+         * @return $this
+         */
+        public function withMiddleware(?callable $callback = null)
+        {
+        }
+        /**
+         * Register additional service providers.
+         *
+         * @return $this
+         */
+        public function withProviders(array $providers = [], bool $withBootstrapProviders = true)
+        {
+        }
+        /**
+         * Get the application instance.
+         *
+         * @return \Roots\Acorn\Application
+         */
+        public function create()
+        {
+        }
+        /**
+         * Boot the application.
+         *
+         * @return \Roots\Acorn\Application
+         */
+        public function boot()
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Console\Commands {
+    abstract class GeneratorCommand extends \Illuminate\Console\GeneratorCommand
+    {
+        /**
+         * The application implementation.
+         *
+         * @var Application
+         */
+        protected $app;
+        /**
+         * {@inheritdoc}
+         */
+        public function setLaravel($laravel)
+        {
+        }
+        /**
+         * {@inheritdoc}
+         */
+        protected function getNameInput()
+        {
+        }
+        /**
+         * Build the class with the given name.
+         *
+         * @param  string  $name
+         * @return string
+         *
+         * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+         */
+        protected function buildClass($name)
+        {
+        }
+        /**
+         * Replace the Illuminate namespace with Acorn for the given stub.
+         *
+         * @param  string  $stub
+         * @return $this
+         */
+        protected function replaceIlluminate(&$stub)
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Console\Concerns {
+    trait GracefullyCallsCommands
+    {
+        /**
+         * Get the Laravel application instance.
+         *
+         * @return \Illuminate\Contracts\Foundation\Application
+         */
+        abstract public function getLaravel();
+        /**
+         * Resolve the console command instance for the given command.
+         *
+         * @param  \Symfony\Component\Console\Command\Command|string  $command
+         * @return \Symfony\Component\Console\Command\Command
+         */
+        abstract protected function resolveCommand($command);
+        /**
+         * Run the given the console command.
+         *
+         * @param  \Symfony\Component\Console\Command\Command|string  $command
+         * @return int
+         */
+        abstract protected function runCommand($command, array $arguments, \Symfony\Component\Console\Output\OutputInterface $output);
+        /**
+         * Call another console command.
+         *
+         * Silently fail if command does not exist.
+         *
+         * @param  \Symfony\Component\Console\Command\Command|string  $command
+         * @return int
+         */
+        public function gracefulCall($command, array $arguments = [])
+        {
+        }
+        /**
+         * Call another console command without output.
+         *
+         * Silently fail if command does not exist.
+         *
+         * @param  \Symfony\Component\Console\Command\Command|string  $command
+         * @return int
+         */
+        public function gracefulCallSilent($command, array $arguments = [])
+        {
+        }
+        /**
+         * Check whether a command exists.
+         *
+         * @param  \Symfony\Component\Console\Command\Command|string  $command
+         * @return bool
+         */
+        protected function commandExists($command)
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Console\Commands {
+    class OptimizeClearCommand extends \Illuminate\Foundation\Console\OptimizeClearCommand
+    {
+        use \Roots\Acorn\Console\Concerns\GracefullyCallsCommands;
+        /**
+         * Execute the console command.
+         *
+         * @return void
+         */
+        public function handle()
+        {
+        }
+    }
+    abstract class Command extends \Illuminate\Console\Command
+    {
+        /**
+         * The application implementation.
+         *
+         * @var Application
+         */
+        protected $app;
+        /**
+         * {@inheritdoc}
+         */
+        public function setLaravel($laravel)
+        {
+        }
+    }
+    class KeyGenerateCommand extends \Illuminate\Foundation\Console\KeyGenerateCommand
+    {
+        /**
+         * Write a new environment file with the given key.
+         *
+         * @param  string  $key
+         * @return bool
+         */
+        protected function writeNewEnvironmentFileWith($key)
+        {
+        }
+        protected function replace($envFile, $key): bool
+        {
+        }
+        protected function prepend($envFile, $key): bool
+        {
+        }
+    }
+    class AcornInstallCommand extends \Roots\Acorn\Console\Commands\Command
+    {
+        /**
+         * The name and signature of the console command.
+         *
+         * @var string
+         */
+        protected $signature = 'acorn:install
+                            {--autoload : Install the Acorn autoload dump script}
+                            {--init : Initialize Acorn}';
+        /**
+         * The console command description.
+         *
+         * @var string
+         */
+        protected $description = 'Install Acorn into the application';
+        /**
+         * Execute the console command.
+         */
+        public function handle(): int
+        {
+        }
+        /**
+         * Ask to install the Acorn autoload dump script.
+         */
+        protected function askToInstallScript(): void
+        {
+        }
+        /**
+         * Install the Acorn autoload dump script.
+         */
+        protected function installAutoloadDump(): void
+        {
+        }
+        /**
+         * Ask the user to initialize Acorn.
+         */
+        protected function askToInitialize(): void
+        {
+        }
+        /**
+         * Ask the user to star the Acorn repository.
+         */
+        protected function askToStar(): void
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Console\Concerns {
+    trait GetsFreshApplication
+    {
+        /**
+         * Get a fresh application instance.
+         *
+         * @return \Illuminate\Contracts\Foundation\Application
+         */
+        protected function getFreshApplication()
+        {
+        }
+        /**
+         * Boot a fresh copy of the application configuration.
+         *
+         * @return array
+         */
+        protected function getFreshConfiguration()
+        {
+        }
+        /**
+         * Get all of the configured paths for the Application.
+         *
+         * @return array
+         */
+        protected function getApplicationPaths(\Roots\Acorn\Application $app)
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Console\Commands {
+    class ConfigCacheCommand extends \Illuminate\Foundation\Console\ConfigCacheCommand
+    {
+        use \Roots\Acorn\Console\Concerns\GetsFreshApplication {
+            getFreshConfiguration as getPristineConfiguration;
+        }
+        /**
+         * Get a fresh copy of the application configuration.
+         *
+         * Nonexistent providers are filtered out.
+         *
+         * @return array
+         */
+        protected function getFreshConfiguration()
+        {
+        }
+    }
+    class ComposerMakeCommand extends \Roots\Acorn\Console\Commands\GeneratorCommand
+    {
+        /**
+         * The console command name.
+         *
+         * @var string
+         */
+        protected $name = 'make:composer';
+        /**
+         * The console command description.
+         *
+         * @var string
+         */
+        protected $description = 'Create a new view composer class';
+        /**
+         * The type of class being generated.
+         *
+         * @var string
+         */
+        protected $type = 'Composer';
+        /**
+         * List of views served by the composer
+         *
+         * @var array
+         */
+        protected $views = [];
+        /**
+         * Get the stub file for the generator.
+         *
+         * @return string
+         */
+        protected function getStub()
+        {
+        }
+        /**
+         * Get the default namespace for the class.
+         *
+         * @param  string  $rootNamespace
+         * @return string
+         */
+        protected function getDefaultNamespace($rootNamespace)
+        {
+        }
+        /**
+         * Build the class with the given name.
+         *
+         * @param  string  $name
+         * @return string
+         *
+         * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+         */
+        protected function buildClass($name)
+        {
+        }
+        /**
+         * Replace the class name for the given stub.
+         *
+         * @param  string  $stub
+         * @param  array  $views
+         * @return string
+         */
+        protected function replaceViews($stub, $views)
+        {
+        }
+        /**
+         * Get the console command options.
+         *
+         * @return array
+         */
+        protected function getOptions()
+        {
+        }
+    }
+    class RouteCacheCommand extends \Illuminate\Foundation\Console\RouteCacheCommand
+    {
+        use \Roots\Acorn\Console\Concerns\GetsFreshApplication {
+            getFreshApplication as protected parentGetFreshApplication;
+        }
+        /**
+         * Get a fresh application instance.
+         *
+         * @return \Illuminate\Contracts\Foundation\Application
+         */
+        protected function getFreshApplication()
+        {
+        }
+    }
+    class AboutCommand extends \Illuminate\Foundation\Console\AboutCommand
+    {
+        protected function gatherApplicationInformation()
+        {
+        }
+        /**
+         * Add environment information.
+         */
+        protected function aboutEnvironment()
+        {
+        }
+        protected function formatVersion($version)
+        {
+        }
+    }
+    class OptimizeCommand extends \Illuminate\Foundation\Console\OptimizeCommand
+    {
+        use \Roots\Acorn\Console\Concerns\GracefullyCallsCommands;
+        /**
+         * Execute the console command.
+         *
+         * @return void
+         */
+        public function handle()
+        {
+        }
+    }
+    class SummaryCommand extends \Symfony\Component\Console\Command\ListCommand
+    {
+        /**
+         * The application implementation.
+         *
+         * @var Container
+         */
+        protected $app;
+        /**
+         * The application binary.
+         *
+         * @var string
+         */
+        protected $binary = 'wp acorn';
+        /**
+         * The supported format.
+         *
+         * @return string
+         */
+        protected $format = 'txt';
+        /**
+         * The command name width.
+         *
+         * @var int
+         */
+        protected $width = 0;
+        /**
+         * Create a new Summary command instance.
+         */
+        public function __construct(\Illuminate\Contracts\Container\Container $app)
+        {
+        }
+        /**
+         * {@inheritdoc}
+         */
+        protected function execute(\Symfony\Component\Console\Input\InputInterface $input, \Symfony\Component\Console\Output\OutputInterface $output): int
+        {
+        }
+        /**
+         * Write the application title to console.
+         *
+         * @return $this
+         */
+        protected function title(\Symfony\Component\Console\Output\OutputInterface $output)
+        {
+        }
+        /**
+         * Write the command usage to console.
+         *
+         * @return $this;
+         */
+        protected function usage(\Symfony\Component\Console\Output\OutputInterface $output)
+        {
+        }
+        /**
+         * Write the command list to console.
+         *
+         * @return $this
+         */
+        protected function commands(\Symfony\Component\Console\Output\OutputInterface $output)
+        {
+        }
+    }
+    class VendorPublishCommand extends \Illuminate\Foundation\Console\VendorPublishCommand
+    {
+        /**
+         * Publish the given item from and to the given location.
+         *
+         * @param  string  $from
+         * @param  string  $to
+         * @return void
+         */
+        protected function publishItem($from, $to)
+        {
+        }
+        /**
+         * Call acorn:init if item cannot be published.
+         *
+         * @param  string  $from
+         * @param  string  $to
+         */
+        protected function callAcornInit($from, $to)
+        {
+        }
+    }
+    class AcornInitCommand extends \Roots\Acorn\Console\Commands\Command
+    {
+        /**
+         * The name and signature of the console command.
+         *
+         * @var string
+         */
+        protected $signature = <<<'SIGNATURE'
+        acorn:init
+        {path?* : Application path to initialize in the base directory}
+        {--base= : Application base directory}
+        SIGNATURE;
+        /**
+         * The console command description.
+         *
+         * @var string
+         */
+        protected $description = 'Initializes required paths in the base directory.';
+        /**
+         * Available application paths.
+         *
+         * @var string[]
+         */
+        protected $paths = ['app' => 'app', 'bootstrap' => 'storage/framework', 'config' => 'config', 'database' => 'database', 'lang' => 'resources/lang', 'public' => 'public', 'resources' => 'resources', 'storage' => 'storage'];
+        /**
+         * Default application paths to be initialized.
+         *
+         * @var string[]
+         */
+        protected $defaults = ['config'];
+        /**
+         * Application instance.
+         *
+         * @var \Illuminate\Contracts\Foundation\Application
+         */
+        protected $app;
+        /**
+         * Filesystem instance.
+         *
+         * @var \Illuminate\Filesystem\Filesystem
+         */
+        protected $files;
+        /**
+         * Path to Application base directory.
+         *
+         * @var string
+         */
+        protected $basePath;
+        /**
+         * Create a new command instance.
+         *
+         * @param  \Illuminate\Filesystem\Filesystem  $files
+         * @return void
+         */
+        public function __construct(\Roots\Acorn\Filesystem\Filesystem $files, \Illuminate\Contracts\Foundation\Application $app)
+        {
+        }
+        /**
+         * Execute the console command.
+         *
+         * @return void
+         *
+         * @throws \Exception
+         */
+        public function handle()
+        {
+        }
+        /**
+         * Get default paths to be initialized.
+         *
+         * @return string[]
+         */
+        protected function defaultPaths()
+        {
+        }
+        /**
+         * Initialize the given path.
+         *
+         * @param  string  $key
+         * @param  string  $path
+         * @return bool
+         */
+        protected function initPath($key, $path)
+        {
+        }
+        /**
+         * Initialize the given path.
+         *
+         * @param  string  $path
+         * @return bool
+         */
+        protected function createPath($path)
+        {
+        }
+    }
+}
+namespace Roots\Acorn\Console {
+    class Console extends \Illuminate\Support\Composer
+    {
+        /**
+         * Execute acorn clear-compiled command.
+         */
+        public function clearCompiled(): int
+        {
+        }
+        /**
+         * Execute acorn config:cache command.
+         */
+        public function configCache(): int
+        {
+        }
+        /**
+         * Execute acorn config:clear command.
+         */
+        public function configClear(): int
+        {
+        }
+        /**
+         * Execute acorn optimize command.
+         */
+        public function optimize(): int
+        {
+        }
+        /**
+         * Execute acorn optimize:clear command.
+         */
+        public function optimizeClear(): int
+        {
+        }
+        /**
+         * Execute acorn package:discover command.
+         */
+        public function packageDiscover(): int
+        {
+        }
+        /**
+         * Execute acorn vendor:public command.
+         */
+        public function vendorPublish(): int
+        {
+        }
+        /**
+         * Execute acorn view:cache command.
+         */
+        public function viewCache(): int
+        {
+        }
+        /**
+         * Execute acorn view:clear command.
+         */
+        public function viewClear(): int
+        {
+        }
+        /**
+         * Execute acorn command.
+         *
+         * @param  array  $command
+         */
+        public function acorn($command): int
+        {
+        }
+        /**
+         * Get the wp-cli command for the environment.
+         *
+         * @return array
+         */
+        protected function findWpCli()
+        {
+        }
+    }
+    class Kernel extends \Illuminate\Foundation\Console\Kernel
+    {
+        /**
+         * The Console commands provided by the application.
+         *
+         * @var array
+         */
+        protected $commands = [\Illuminate\Cache\Console\ClearCommand::class, \Illuminate\Cache\Console\ForgetCommand::class, \Illuminate\Database\Console\DbCommand::class, \Illuminate\Database\Console\Seeds\SeedCommand::class, \Illuminate\Database\Console\Seeds\SeederMakeCommand::class, \Illuminate\Database\Console\TableCommand::class, \Illuminate\Database\Console\WipeCommand::class, \Illuminate\Foundation\Console\ClearCompiledCommand::class, \Illuminate\Foundation\Console\ComponentMakeCommand::class, \Illuminate\Foundation\Console\ConfigClearCommand::class, \Illuminate\Foundation\Console\ConsoleMakeCommand::class, \Illuminate\Foundation\Console\EnvironmentCommand::class, \Illuminate\Foundation\Console\JobMakeCommand::class, \Illuminate\Foundation\Console\PackageDiscoverCommand::class, \Illuminate\Foundation\Console\ProviderMakeCommand::class, \Illuminate\Foundation\Console\RouteClearCommand::class, \Illuminate\Foundation\Console\RouteListCommand::class, \Illuminate\Foundation\Console\ViewCacheCommand::class, \Illuminate\Foundation\Console\ViewClearCommand::class, \Illuminate\Queue\Console\BatchesTableCommand::class, \Illuminate\Queue\Console\FailedTableCommand::class, \Illuminate\Queue\Console\TableCommand::class, \Illuminate\Queue\Console\WorkCommand::class, \Illuminate\Queue\Console\ClearCommand::class, \Illuminate\Console\Scheduling\ScheduleListCommand::class, \Illuminate\Console\Scheduling\ScheduleRunCommand::class, \Illuminate\Console\Scheduling\ScheduleWorkCommand::class, \Illuminate\Console\Scheduling\ScheduleTestCommand::class, \Illuminate\Console\Scheduling\ScheduleInterruptCommand::class, \Illuminate\Routing\Console\ControllerMakeCommand::class, \Illuminate\Routing\Console\MiddlewareMakeCommand::class, \Roots\Acorn\Console\Commands\AboutCommand::class, \Roots\Acorn\Console\Commands\AcornInitCommand::class, \Roots\Acorn\Console\Commands\AcornInstallCommand::class, \Roots\Acorn\Console\Commands\ComposerMakeCommand::class, \Roots\Acorn\Console\Commands\ConfigCacheCommand::class, \Roots\Acorn\Console\Commands\KeyGenerateCommand::class, \Roots\Acorn\Console\Commands\OptimizeClearCommand::class, \Roots\Acorn\Console\Commands\OptimizeCommand::class, \Roots\Acorn\Console\Commands\RouteCacheCommand::class, \Roots\Acorn\Console\Commands\SummaryCommand::class, \Roots\Acorn\Console\Commands\VendorPublishCommand::class];
+        /**
+         * The bootstrap classes for the application.
+         *
+         * @var string[]
+         */
+        protected $bootstrappers = [\Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables::class, \Roots\Acorn\Bootstrap\LoadConfiguration::class, \Roots\Acorn\Bootstrap\HandleExceptions::class, \Roots\Acorn\Bootstrap\RegisterFacades::class, \Illuminate\Foundation\Bootstrap\SetRequestForConsole::class, \Illuminate\Foundation\Bootstrap\RegisterProviders::class, \Illuminate\Foundation\Bootstrap\BootProviders::class];
+        /**
+         * Create a new console kernel instance.
+         *
+         * @return void
+         */
+        public function __construct(\Illuminate\Contracts\Foundation\Application $app, \Illuminate\Contracts\Events\Dispatcher $events)
+        {
+        }
+        /**
+         * Register the Closure based commands for the application.
+         *
+         * @return void
+         */
+        public function commands()
+        {
+        }
+    }
+}
+namespace Roots {
+    /**
+     * Get asset from manifest
+     */
+    function asset(string $asset, ?string $manifest = null): \Roots\Acorn\Assets\Contracts\Asset
+    {
+    }
+    /**
+     * Get bundle from manifest
+     */
+    function bundle(string $bundle, ?string $manifest = null): \Roots\Acorn\Assets\Bundle
+    {
+    }
+    /**
+     * Instantiate the bootloader.
+     *
+     * @deprecated Use `Application::configure()->boot()` instead.
+     */
+    function bootloader(?\Illuminate\Contracts\Foundation\Application $app = null): \Roots\Acorn\Application
+    {
+    }
+    /**
+     * Get the evaluated view contents for the given view or file.
+     *
+     * @param  string|null  $view
+     * @param  \Illuminate\Contracts\Support\Arrayable|array  $data
+     * @param  array  $mergeData
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     *
+     * @copyright Taylor Otwell
+     *
+     * @link https://github.com/laravel/framework/blob/8.x/src/Illuminate/Foundation/helpers.php
+     */
+    function view($view = null, $data = [], $mergeData = [])
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function app(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function app_path(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function base_path(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function bcrypt(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function broadcast(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function cache(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function config(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function config_path(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function database_path(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function decrypt(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function encrypt(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function info(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function logger(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function logs(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function now(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function public_path(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function report(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function rescue(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function resolve(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function resource_path(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function storage_path(...$args)
+    {
+    }
+    /**
+     * @deprecated
+     */
+    function today(...$args)
+    {
+    }
+}
+namespace {
+    function asset(string $asset)
+    {
+    }
+    function view()
+    {
+    }
+}

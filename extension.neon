@@ -1,0 +1,47 @@
+# KoalaStan - PHPStan extension for KoalaPress projects
+
+includes:
+    - %vendorDir%/szepeviktor/phpstan-wordpress/extension.neon
+    - %vendorDir%/larastan/larastan/extension.neon
+
+parameters:
+    level: 6
+
+    # Pre-generated stubs from KoalaStan
+    stubFiles:
+        - %currentWorkingDirectory%/stubs/koalapress-stubs.stub
+        - %currentWorkingDirectory%/stubs/corcel-stubs.stub
+        - %currentWorkingDirectory%/stubs/acorn-stubs.stub
+
+    # Sensible WordPress exclusions
+    excludePaths:
+        - */vendor/*
+        - */wp-core/*
+        - */wp/*
+        - */uploads/*
+        - */cache/*
+        - */storage/*
+        - */node_modules/*
+        - web/wp/
+
+    # Common WordPress & Laravel-related errors to ignore
+    ignoreErrors:
+        - '#Function \w+ not found\.#'
+        - '#Constant \w+ not found\.#'
+        - '#Call to an undefined method WP_\w+::\w+\(\)\.#'
+        - '#Call to an undefined method Illuminate\\.*#'
+        - '#Property Corcel\\Model\\.*::\$\w+ is never read, only written\.#'
+        - '#Undefined variable: \$(wpdb|wp_query|wp_rewrite|post)#'
+
+    # WordPress global objects
+    universalObjectCratesClasses:
+        - stdClass
+        - WP_Post
+        - WP_User
+        - WP_Term
+        - WP_Query
+        - WP_Error
+
+    # Reasonable defaults
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
